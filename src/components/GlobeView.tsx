@@ -131,6 +131,10 @@ function GlobeViewInner({
 
   const displayArcs = useMemo(() => {
     void arcTick;
+    const phase = animPhaseRef.current;
+    if (phase === "resetting" || phase === "hiding") {
+      if (!highlightIso3) return [];
+    }
     if (!highlightIso3) return edges;
     const revealed = revealedIdsRef.current;
     if (revealed.size === 0) return [];
@@ -373,6 +377,7 @@ function GlobeViewInner({
             animTimerRef.current = setTimeout(() => {
               animPhaseRef.current = "idle";
               animTimerRef.current = null;
+              setArcTick(t => t + 1);
             }, 1000);
           });
         });
@@ -506,6 +511,7 @@ function GlobeViewInner({
       animTimerRef.current = setTimeout(() => {
         animPhaseRef.current = "idle";
         animTimerRef.current = null;
+        setArcTick(t => t + 1);
       }, 1000);
     });
   }, [selectedCountryIso3, onSelectCountry, edges, points, startHide]);
