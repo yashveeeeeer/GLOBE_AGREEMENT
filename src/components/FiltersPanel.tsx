@@ -41,6 +41,13 @@ function FiltersPanelInner({
     [filters, onChange]
   );
 
+  const filteredCountryOptions = useMemo(
+    () => countryOptions.filter((name) =>
+      name.toLowerCase().includes(countryQuery.trim().toLowerCase())
+    ),
+    [countryOptions, countryQuery]
+  );
+
   if (collapsed) {
     return (
       <button
@@ -85,12 +92,6 @@ function FiltersPanelInner({
   const selectedTypes = Array.from(filters.selectedTypes);
   const selectedContinents = Array.from(filters.selectedContinents);
   const selectedCountries = Array.from(filters.selectedCountries);
-  const filteredCountryOptions = useMemo(
-    () => countryOptions.filter((name) =>
-      name.toLowerCase().includes(countryQuery.trim().toLowerCase())
-    ),
-    [countryOptions, countryQuery]
-  );
 
   return (
     <div className="absolute top-4 left-4 z-20 glass-panel w-64 sm:w-72 max-h-[calc(100vh-32px)] flex flex-col">
