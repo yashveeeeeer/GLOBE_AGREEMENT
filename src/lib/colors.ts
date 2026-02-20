@@ -56,3 +56,16 @@ export function getTypeColorRgba(typeCode: string, alpha: number): string {
 export const POINT_COLOR_DEFAULT = "#3790C9";
 export const POINT_COLOR_HOVER = "#5FB3DC";
 export const POINT_COLOR_SELECTED = "#1a4f7a";
+
+// Night mode palette
+export const NIGHT_BG = "#000011";
+export const NIGHT_ATMOSPHERE = "rgba(200, 220, 255, 0.18)";
+export const NIGHT_ARC_HIGHLIGHT = "rgba(255, 255, 255, 0.60)";
+export const NIGHT_ARC_DIM = "rgba(255, 255, 255, 0.03)";
+export const NIGHT_ARC_DEFAULT_ALPHA = 0.12;
+export const NIGHT_POINT_COLOR = "#ffffff";
+export const NIGHT_POINT_COLOR_HIGHLIGHT = "#e0e8ff";
+
+export function getTypeColorRgbaNight(_typeCode: string, alpha: number): string {
+  return `rgba(255,255,255,${alpha})`;
+}

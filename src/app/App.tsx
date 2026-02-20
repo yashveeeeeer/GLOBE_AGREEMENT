@@ -32,6 +32,7 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
   const [animDone, setAnimDone] = useState(false);
+  const [nightMode, setNightMode] = useState(false);
   const [meta, setMeta] = useState<DataMeta | null>(null);
   const [filters, setFilters] = useState<FilterState | null>(null);
 
@@ -148,6 +149,10 @@ export default function App() {
     );
   }, []);
 
+  const handleToggleNightMode = useCallback(() => {
+    setNightMode((prev) => !prev);
+  }, []);
+
   if (loading) {
     return (
       <div className="w-full h-full flex flex-col items-center justify-center bg-[#FAF9F6]">
@@ -180,8 +185,12 @@ export default function App() {
 
   return (
     <div
-      className={`w-full h-full relative overflow-hidden bg-[#FAF9F6]${revealed && !animDone ? " globe-enter" : ""}`}
-      style={revealed ? undefined : { opacity: 0 }}
+      className={`w-full h-full relative overflow-hidden${revealed && !animDone ? " globe-enter" : ""}`}
+      style={{
+        backgroundColor: nightMode ? "#000011" : "#FAF9F6",
+        transition: "background-color 0.6s ease",
+        ...(revealed ? {} : { opacity: 0 }),
+      }}
       onAnimationEnd={() => setAnimDone(true)}
     >
       <ErrorBoundary>
@@ -189,6 +198,8 @@ export default function App() {
           edges={filteredEdges}
           selectedCountryIso3={filters?.selectedCountryIso3 ?? null}
           onSelectCountry={handleSelectCountry}
+          nightMode={nightMode}
+          onToggleNightMode={handleToggleNightMode}
         />
       </ErrorBoundary>
 
@@ -205,6 +216,7 @@ export default function App() {
       <StatsPanel
         filteredEdges={filteredEdges}
         totalEdges={allEdges.length}
+        revealed={revealed}
       />
 
       {filters?.selectedCountryIso3 && (

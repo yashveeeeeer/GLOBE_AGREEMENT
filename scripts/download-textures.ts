@@ -17,6 +17,14 @@ const textures: { url: string; filename: string; dir?: string }[] = [
     filename: "earth-day.jpg",
   },
   {
+    url: "https://unpkg.com/three-globe@2.31.1/example/img/earth-night.jpg",
+    filename: "earth-night.jpg",
+  },
+  {
+    url: "https://unpkg.com/three-globe@2.31.1/example/img/night-sky.png",
+    filename: "night-sky.png",
+  },
+  {
     url: "https://unpkg.com/three-globe@2.31.1/example/img/earth-topology.png",
     filename: "earth-topology.png",
   },

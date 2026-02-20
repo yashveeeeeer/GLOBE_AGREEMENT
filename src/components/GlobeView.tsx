@@ -33,14 +33,23 @@ import { buildPointsFromEdges, spreadOverlappingPoints } from "@/lib/data";
 import {
   getTypeColor,
   getTypeColorRgba,
+  getTypeColorRgbaNight,
+  NIGHT_BG,
+  NIGHT_ATMOSPHERE,
+  NIGHT_ARC_HIGHLIGHT,
+  NIGHT_ARC_DIM,
+  NIGHT_POINT_COLOR,
+  NIGHT_POINT_COLOR_HIGHLIGHT,
 } from "@/lib/colors";
 import { isEdgeConnectedToCountry } from "@/lib/filtering";
-import { RotateCcw } from "lucide-react";
+import { RotateCcw, Sun, Moon } from "lucide-react";
 
 interface GlobeViewProps {
   edges: Edge[];
   selectedCountryIso3: string | null;
   onSelectCountry: (iso3: string | null) => void;
+  nightMode: boolean;
+  onToggleNightMode: () => void;
 }
 
 const ARC_HIGHLIGHT = "rgba(55, 144, 201, 0.60)";
@@ -57,6 +66,8 @@ function GlobeViewInner({
   edges,
   selectedCountryIso3,
   onSelectCountry,
+  nightMode,
+  onToggleNightMode,
 }: GlobeViewProps) {
   const globeRef = useRef<GlobeHandle>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -186,10 +197,14 @@ function GlobeViewInner({
   const pointColorFn = useCallback(
     (d: object) => {
       const p = d as PointDatum;
+      if (nightMode) {
+        if (highlightIso3 && p.iso3 === highlightIso3) return NIGHT_POINT_COLOR_HIGHLIGHT;
+        return NIGHT_POINT_COLOR;
+      }
       if (highlightIso3 && p.iso3 === highlightIso3) return POINT_COLOR_HIGHLIGHT;
       return POINT_COLOR;
     },
-    [highlightIso3]
+    [highlightIso3, nightMode]
   );
 
   const handlePointHover = useCallback(
@@ -239,14 +254,18 @@ function GlobeViewInner({
     (d: object) => {
       const e = d as Edge;
       if (!highlightIso3) {
-        const c = getTypeColorRgba(e.agreement_type_code, 0.12);
+        const c = nightMode
+          ? getTypeColorRgbaNight(e.agreement_type_code, 0.12)
+          : getTypeColorRgba(e.agreement_type_code, 0.12);
         return [c, c];
       }
+      const hl = nightMode ? NIGHT_ARC_HIGHLIGHT : ARC_HIGHLIGHT;
+      const dim = nightMode ? NIGHT_ARC_DIM : ARC_DIM;
       if (isEdgeConnectedToCountry(e, highlightIso3))
-        return [ARC_HIGHLIGHT, ARC_HIGHLIGHT];
-      return [ARC_DIM, ARC_DIM];
+        return [hl, hl];
+      return [dim, dim];
     },
-    [highlightIso3]
+    [highlightIso3, nightMode]
   );
 
   const arcStrokeFn = useCallback(
@@ -314,10 +333,11 @@ function GlobeViewInner({
         ref={globeRef}
         width={dimensions.width}
         height={dimensions.height}
-        globeImageUrl={`${import.meta.env.BASE_URL}textures/earth-day.jpg`}
-        backgroundColor="#FAF9F6"
+        globeImageUrl={`${import.meta.env.BASE_URL}textures/${nightMode ? "earth-night.jpg" : "earth-day.jpg"}`}
+        backgroundImageUrl={nightMode ? `${import.meta.env.BASE_URL}textures/night-sky.png` : undefined}
+        backgroundColor={nightMode ? NIGHT_BG : "#FAF9F6"}
         showAtmosphere={true}
-        atmosphereColor="rgba(55, 144, 201, 0.25)"
+        atmosphereColor={nightMode ? NIGHT_ATMOSPHERE : "rgba(55, 144, 201, 0.25)"}
         atmosphereAltitude={0.12}
         animateIn={true}
         // Native WebGL points
@@ -350,14 +370,27 @@ function GlobeViewInner({
         onArcHover={undefined}
       />
 
-      <button
-        onClick={resetView}
-        className="absolute bottom-6 right-6 glass-panel px-4 py-2 flex items-center gap-2 text-sm text-[#3790C9] hover:text-[#41A0D8] transition-colors cursor-pointer"
-        title="Reset view"
-      >
-        <RotateCcw size={16} />
-        Reset View
-      </button>
+      <div className="absolute bottom-6 right-6 flex items-center gap-2">
+        <button
+          onClick={onToggleNightMode}
+          className={`glass-panel px-3 py-2 flex items-center gap-1.5 text-sm transition-colors cursor-pointer ${
+            nightMode
+              ? "text-amber-400 hover:text-amber-300"
+              : "text-[#3790C9] hover:text-[#41A0D8]"
+          }`}
+          title={nightMode ? "Switch to day mode" : "Switch to night mode"}
+        >
+          {nightMode ? <Sun size={16} /> : <Moon size={16} />}
+        </button>
+        <button
+          onClick={resetView}
+          className="glass-panel px-4 py-2 flex items-center gap-2 text-sm text-[#3790C9] hover:text-[#41A0D8] transition-colors cursor-pointer"
+          title="Reset view"
+        >
+          <RotateCcw size={16} />
+          Reset View
+        </button>
+      </div>
     </div>
   );
 }

@@ -3,31 +3,31 @@ import { BarChart3, ChevronLeft, ChevronRight } from "lucide-react";
 import type { Edge } from "@/lib/data";
 import { getTypeColor } from "@/lib/colors";
 
-function useAnimatedCount(target: number, durationMs = 1200): number {
+function useAnimatedCount(target: number, enabled: boolean, durationMs = 1200): number {
   const [display, setDisplay] = useState(0);
   const raf = useRef<number>(0);
 
   useEffect(() => {
+    if (!enabled) { setDisplay(0); return; }
     const start = performance.now();
-    const from = 0;
 
     const tick = (now: number) => {
       const t = Math.min((now - start) / durationMs, 1);
       const eased = t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
-      setDisplay(Math.round(from + (target - from) * eased));
+      setDisplay(Math.round(target * eased));
       if (t < 1) raf.current = requestAnimationFrame(tick);
     };
 
     raf.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf.current);
-  }, [target, durationMs]);
+  }, [target, enabled, durationMs]);
 
   return display;
 }
 
-function AnimatedCounts({ edgeCount, totalEdges, agreementCount }: { edgeCount: number; totalEdges: number; agreementCount: number }) {
-  const animEdges = useAnimatedCount(edgeCount);
-  const animAgreements = useAnimatedCount(agreementCount);
+function AnimatedCounts({ edgeCount, totalEdges, agreementCount, revealed }: { edgeCount: number; totalEdges: number; agreementCount: number; revealed: boolean }) {
+  const animEdges = useAnimatedCount(edgeCount, revealed);
+  const animAgreements = useAnimatedCount(agreementCount, revealed);
 
   return (
     <div className="grid grid-cols-2 gap-3">
@@ -52,9 +52,10 @@ function AnimatedCounts({ edgeCount, totalEdges, agreementCount }: { edgeCount: 
 interface StatsPanelProps {
   filteredEdges: Edge[];
   totalEdges: number;
+  revealed: boolean;
 }
 
-function StatsPanelInner({ filteredEdges, totalEdges }: StatsPanelProps) {
+function StatsPanelInner({ filteredEdges, totalEdges, revealed }: StatsPanelProps) {
   const [collapsed, setCollapsed] = useState(() => window.innerWidth < 768);
 
   const stats = useMemo(() => {
@@ -128,6 +129,7 @@ function StatsPanelInner({ filteredEdges, totalEdges }: StatsPanelProps) {
           edgeCount={filteredEdges.length}
           totalEdges={totalEdges}
           agreementCount={stats.uniqueAgreements}
+          revealed={revealed}
         />
 
         {/* Top Types */}
