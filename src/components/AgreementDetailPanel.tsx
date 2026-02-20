@@ -49,11 +49,12 @@ function AgreementDetailPanelInner({
     return (
       <button
         onClick={() => setExpanded(true)}
-        className={`z-20 glass-panel text-[#3790C9] hover:text-[#41A0D8] transition-colors cursor-pointer ${
+        className={`glass-panel text-[#3790C9] hover:text-[#41A0D8] transition-colors cursor-pointer ${
           isSmallScreen
             ? "fixed bottom-0 left-0 right-0 flex items-center justify-center gap-2 py-3 rounded-t-2xl rounded-b-none text-xs font-medium"
             : `absolute ${panelBottomClass} right-4 p-3`
         }`}
+        style={{ zIndex: 110 }}
         title="Show agreements"
       >
         {isSmallScreen ? (
@@ -69,11 +70,14 @@ function AgreementDetailPanelInner({
   }
 
   return (
-    <div className={`z-20 glass-panel flex flex-col ${
-      isSmallScreen
-        ? "fixed bottom-0 left-0 right-0 max-h-[50vh] rounded-t-2xl rounded-b-none"
-        : `absolute ${panelBottomClass} right-4 w-72 max-h-[50vh]`
-    }`}>
+    <div
+      className={`glass-panel flex flex-col ${
+        isSmallScreen
+          ? "fixed bottom-0 left-0 right-0 max-h-[50vh] rounded-t-2xl rounded-b-none"
+          : `absolute ${panelBottomClass} right-4 w-72 max-h-[50vh]`
+      }`}
+      style={{ zIndex: 110 }}
+    >
       {isSmallScreen && (
         <div className="flex justify-center pt-2 pb-1">
           <div className="w-10 h-1 rounded-full bg-[#827875]/30" />

@@ -231,11 +231,14 @@ export default function App() {
       )}
 
       {filters?.selectedCountryIso3 && (
-        <div className={`absolute z-30 glass-panel flex items-center gap-3 ${
-          isSmallScreen
-            ? "top-3 left-3 right-3 px-3 py-2"
-            : "bottom-4 left-1/2 -translate-x-1/2 px-5 py-2"
-        }`}>
+        <div
+          className={`absolute glass-panel flex items-center gap-3 ${
+            isSmallScreen
+              ? "top-14 left-3 right-3 px-3 py-2"
+              : "bottom-4 left-1/2 -translate-x-1/2 px-5 py-2"
+          }`}
+          style={{ zIndex: 110 }}
+        >
           <span className={`text-[#3a3635] ${isSmallScreen ? "text-xs truncate" : "text-sm whitespace-nowrap"}`}>
             <span className="font-semibold text-[#3790C9]">
               {selectedCountryName}
@@ -256,13 +259,20 @@ export default function App() {
         </div>
       )}
 
-      {!isSmallScreen && (
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 pointer-events-none select-none">
-          <span className="text-[#3790C9]/60 text-xs font-semibold tracking-[0.12em] uppercase">
-            International Investment Agreements Navigator
-          </span>
-        </div>
-      )}
+      <div
+        className={`absolute pointer-events-none select-none ${
+          isSmallScreen
+            ? "top-4 left-14 right-14 text-center"
+            : "top-4 left-1/2 -translate-x-1/2"
+        }`}
+        style={{ zIndex: 100 }}
+      >
+        <span className={`text-[#3790C9] font-semibold tracking-[0.12em] uppercase ${
+          isSmallScreen ? "text-[9px] leading-tight opacity-70" : "text-xs opacity-60"
+        }`}>
+          International Investment Agreements Navigator
+        </span>
+      </div>
 
       {filteredEdges.length === 0 && !loading && (
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 glass-panel px-8 py-6 text-center">

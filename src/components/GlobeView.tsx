@@ -45,7 +45,7 @@ import {
   NIGHT_POINT_UNCONNECTED,
 } from "@/lib/colors";
 import { isEdgeConnectedToCountry } from "@/lib/filtering";
-import { isMobile } from "@/lib/mobile";
+import { isMobile, isSmallScreen } from "@/lib/mobile";
 import { RotateCcw, Sun, Moon } from "lucide-react";
 
 interface GlobeViewProps {
@@ -57,11 +57,7 @@ interface GlobeViewProps {
 }
 
 const ARC_HIGHLIGHT = "rgba(55, 144, 201, 0.60)";
-const ARC_DIM = "rgba(130, 120, 117, 0.03)";
-
 const POINT_COLOR = "#3790C9";
-const POINT_COLOR_HIGHLIGHT = "#41A0D8";
-
 const SPREAD_THRESHOLD = 1.5;
 const ANIM_REVEAL_MS = 1500;
 const ANIM_MAX_STEPS = 30;
@@ -130,6 +126,20 @@ function GlobeViewInner({
     () => spreadOverlappingPoints(points, zoomedIn),
     [points, zoomedIn]
   );
+
+  const displayArcs = useMemo(() => {
+    void arcTick;
+    if (!highlightIso3) return edges;
+    const revealed = revealedIdsRef.current;
+    if (revealed.size === 0) return [];
+    const result: Edge[] = [];
+    for (const e of edges) {
+      if (isEdgeConnectedToCountry(e, highlightIso3) && revealed.has(e.edge_id)) {
+        result.push(e);
+      }
+    }
+    return result;
+  }, [edges, highlightIso3, arcTick]);
 
   // ── Animation helpers ──────────────────────────────────────────────
 
@@ -247,7 +257,7 @@ function GlobeViewInner({
       controls.minDistance = isMobile ? 150 : 120;
       controls.maxDistance = 600;
     }
-    globe.pointOfView({ lat: 20, lng: 0, altitude: 2.5 });
+    globe.pointOfView({ lat: 20, lng: 0, altitude: isSmallScreen ? 3.2 : 2.5 });
 
     const onControlChange = () => {
       if (rafRef.current) return;
@@ -344,38 +354,42 @@ function GlobeViewInner({
       cancelAnim();
 
       if (selectedCountryIso3 === p.iso3) {
-        // Deselect: hide arcs counter-clockwise, then deselect + reset camera
-        const sorted = sortEdgesByBearing(p.iso3, p.lat, p.lng, edges);
-        sortedArcsRef.current = sorted;
-        revealedIdsRef.current = new Set(sorted.map(e => e.edge_id));
-        setArcTick(t => t + 1);
-
-        startHide(() => {
-          onSelectCountry(null);
-          animPhaseRef.current = "resetting";
+        // Deselect: defer sort to next frame, then run hide animation
+        animPhaseRef.current = "hiding";
+        requestAnimationFrame(() => {
+          const sorted = sortEdgesByBearing(p.iso3, p.lat, p.lng, edges);
+          sortedArcsRef.current = sorted;
+          revealedIdsRef.current = new Set(sorted.map(e => e.edge_id));
           setArcTick(t => t + 1);
-          const globe = globeRef.current;
-          if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: 2.5 }, 1000);
-          animTimerRef.current = setTimeout(() => {
-            animPhaseRef.current = "idle";
-            animTimerRef.current = null;
-          }, 1000);
+
+          startHide(() => {
+            onSelectCountry(null);
+            animPhaseRef.current = "resetting";
+            setArcTick(t => t + 1);
+            const globe = globeRef.current;
+            if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: isSmallScreen ? 3.2 : 2.5 }, 1000);
+            animTimerRef.current = setTimeout(() => {
+              animPhaseRef.current = "idle";
+              animTimerRef.current = null;
+            }, 1000);
+          });
         });
       } else {
-        // Select: update immediately (points glow), center camera, then reveal arcs
-        onSelectCountry(p.iso3);
-        const sorted = sortEdgesByBearing(p.iso3, p.lat, p.lng, edges);
-        sortedArcsRef.current = sorted;
-        revealedIdsRef.current = new Set();
-        setArcTick(t => t + 1);
-
+        // Select: start camera immediately, defer heavy work to next frame
         animPhaseRef.current = "centering";
         const globe = globeRef.current;
         if (globe) globe.pointOfView({ lat: p.lat, lng: p.lng, altitude: 2 }, 1000);
 
-        animTimerRef.current = setTimeout(() => {
-          startReveal();
-        }, 1000);
+        requestAnimationFrame(() => {
+          onSelectCountry(p.iso3);
+          sortedArcsRef.current = sortEdgesByBearing(p.iso3, p.lat, p.lng, edges);
+          revealedIdsRef.current = new Set();
+          setArcTick(t => t + 1);
+
+          animTimerRef.current = setTimeout(() => {
+            startReveal();
+          }, 1000);
+        });
       }
     },
     [selectedCountryIso3, onSelectCountry, edges, cancelAnim, startReveal, startHide]
@@ -401,11 +415,8 @@ function GlobeViewInner({
 
   // ── Arc callbacks (single layer) ─────────────────────────────────────
 
-  const ARC_TRANSPARENT = "rgba(0,0,0,0)";
-
   const arcColorFn = useCallback(
     (d: object) => {
-      void arcTick;
       const e = d as Edge;
       if (!highlightIso3) {
         const c = nightMode
@@ -413,25 +424,18 @@ function GlobeViewInner({
           : getTypeColorRgba(e.agreement_type_code, 0.12);
         return [c, c];
       }
-      if (isEdgeConnectedToCountry(e, highlightIso3) && revealedIdsRef.current.has(e.edge_id)) {
-        const hl = nightMode ? NIGHT_ARC_HIGHLIGHT : ARC_HIGHLIGHT;
-        return [hl, hl];
-      }
-      return [ARC_TRANSPARENT, ARC_TRANSPARENT];
+      const hl = nightMode ? NIGHT_ARC_HIGHLIGHT : ARC_HIGHLIGHT;
+      return [hl, hl];
     },
-    [highlightIso3, nightMode, arcTick]
+    [highlightIso3, nightMode]
   );
 
   const arcStrokeFn = useCallback(
-    (d: object) => {
-      void arcTick;
+    () => {
       if (!highlightIso3) return 0.08;
-      const e = d as Edge;
-      if (isEdgeConnectedToCountry(e, highlightIso3) && revealedIdsRef.current.has(e.edge_id))
-        return 0.35;
-      return 0;
+      return 0.35;
     },
-    [highlightIso3, arcTick]
+    [highlightIso3]
   );
 
   const arcDashLengthFn = useCallback(() => 1, []);
@@ -462,7 +466,7 @@ function GlobeViewInner({
       animPhaseRef.current = "idle";
       revealedIdsRef.current = new Set();
       const globe = globeRef.current;
-      if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: 2.5 }, 1000);
+      if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: isSmallScreen ? 3.2 : 2.5 }, 1000);
       return;
     }
 
@@ -474,7 +478,7 @@ function GlobeViewInner({
       onSelectCountry(null);
       setArcTick(t => t + 1);
       const globe = globeRef.current;
-      if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: 2.5 }, 1000);
+      if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: isSmallScreen ? 3.2 : 2.5 }, 1000);
       return;
     }
 
@@ -496,7 +500,7 @@ function GlobeViewInner({
       animPhaseRef.current = "resetting";
       setArcTick(t => t + 1);
       const globe = globeRef.current;
-      if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: 2.5 }, 1000);
+      if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: isSmallScreen ? 3.2 : 2.5 }, 1000);
       animTimerRef.current = setTimeout(() => {
         animPhaseRef.current = "idle";
         animTimerRef.current = null;
@@ -527,9 +531,9 @@ function GlobeViewInner({
         pointResolution={isMobile ? 4 : 12}
         pointLabel={pointLabelFn}
         onPointClick={handlePointClick}
-        pointsTransitionDuration={800}
+        pointsTransitionDuration={0}
         // Arcs
-        arcsData={edges}
+        arcsData={displayArcs}
         arcStartLat="src_lat"
         arcStartLng="src_lng"
         arcEndLat="dst_lat"
@@ -543,33 +547,55 @@ function GlobeViewInner({
         arcAltitudeAutoScale={0.4}
         arcLabel={arcLabelFn}
         arcCurveResolution={isMobile ? 6 : 16}
+        arcsTransitionDuration={0}
         onArcHover={undefined}
       />
 
-      <div className={`absolute flex items-center gap-2 ${isMobile ? "bottom-16 right-4" : "bottom-6 right-6"}`}>
-        <button
-          onClick={onToggleNightMode}
-          className={`glass-panel flex items-center gap-1.5 text-sm transition-colors cursor-pointer ${
-            isMobile ? "px-4 py-3" : "px-3 py-2"
-          } ${
-            nightMode
-              ? "text-amber-400 hover:text-amber-300"
-              : "text-[#3790C9] hover:text-[#41A0D8]"
-          }`}
-          title={nightMode ? "Switch to day mode" : "Switch to night mode"}
-        >
-          {nightMode ? <Sun size={isMobile ? 20 : 16} /> : <Moon size={isMobile ? 20 : 16} />}
-        </button>
-        <button
-          onClick={resetView}
-          className={`glass-panel flex items-center gap-2 text-sm text-[#3790C9] hover:text-[#41A0D8] transition-colors cursor-pointer ${
-            isMobile ? "px-4 py-3" : "px-4 py-2"
-          }`}
-          title="Reset view"
-        >
-          <RotateCcw size={isMobile ? 20 : 16} />
-          {!isMobile && "Reset View"}
-        </button>
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 100 }}>
+        {isSmallScreen ? (
+          <>
+            <button
+              onClick={onToggleNightMode}
+              className={`pointer-events-auto absolute top-3 left-3 glass-panel flex items-center justify-center p-2.5 transition-colors cursor-pointer ${
+                nightMode
+                  ? "text-amber-400 hover:text-amber-300"
+                  : "text-[#3790C9] hover:text-[#41A0D8]"
+              }`}
+              title={nightMode ? "Switch to day mode" : "Switch to night mode"}
+            >
+              {nightMode ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <button
+              onClick={resetView}
+              className="pointer-events-auto absolute top-3 right-3 glass-panel flex items-center justify-center p-2.5 text-[#3790C9] hover:text-[#41A0D8] transition-colors cursor-pointer"
+              title="Reset view"
+            >
+              <RotateCcw size={18} />
+            </button>
+          </>
+        ) : (
+          <div className="pointer-events-auto absolute flex items-center gap-2 bottom-6 right-6">
+            <button
+              onClick={onToggleNightMode}
+              className={`glass-panel flex items-center gap-1.5 text-sm px-3 py-2 transition-colors cursor-pointer ${
+                nightMode
+                  ? "text-amber-400 hover:text-amber-300"
+                  : "text-[#3790C9] hover:text-[#41A0D8]"
+              }`}
+              title={nightMode ? "Switch to day mode" : "Switch to night mode"}
+            >
+              {nightMode ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+            <button
+              onClick={resetView}
+              className="glass-panel flex items-center gap-2 text-sm text-[#3790C9] hover:text-[#41A0D8] transition-colors cursor-pointer px-4 py-2"
+              title="Reset view"
+            >
+              <RotateCcw size={16} />
+              Reset View
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

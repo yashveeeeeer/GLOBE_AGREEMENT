@@ -54,16 +54,17 @@ function FiltersPanelInner({
     return (
       <button
         onClick={() => setCollapsed(false)}
-        className={`z-20 glass-panel text-[#3790C9] hover:text-[#41A0D8] transition-colors cursor-pointer ${
+        className={`glass-panel text-[#3790C9] hover:text-[#41A0D8] transition-colors cursor-pointer ${
           isSmallScreen
-            ? "fixed bottom-0 left-0 right-0 flex items-center justify-center gap-2 py-3 rounded-t-2xl rounded-b-none text-xs font-medium"
+            ? "fixed left-4 flex items-center gap-1.5 px-4 py-3 rounded-xl text-xs font-medium"
             : "absolute top-4 left-4 p-3"
         }`}
+        style={isSmallScreen ? { zIndex: 110, bottom: "calc(1rem + env(safe-area-inset-bottom, 0px))" } : { zIndex: 20 }}
         title="Open filters"
       >
         {isSmallScreen ? (
           <>
-            <ChevronUp size={16} />
+            <Filter size={14} />
             Filters
           </>
         ) : (
@@ -107,11 +108,14 @@ function FiltersPanelInner({
   const selectedCountries = Array.from(filters.selectedCountries);
 
   return (
-    <div className={`z-20 glass-panel flex flex-col ${
-      isSmallScreen
-        ? "fixed bottom-0 left-0 right-0 max-h-[60vh] rounded-t-2xl rounded-b-none"
-        : "absolute top-4 left-4 w-64 sm:w-72 max-h-[calc(100vh-32px)]"
-    }`}>
+    <div
+      className={`glass-panel flex flex-col ${
+        isSmallScreen
+          ? "fixed bottom-0 left-0 right-0 max-h-[60vh] rounded-t-2xl rounded-b-none"
+          : "absolute top-4 left-4 w-64 sm:w-72 max-h-[calc(100vh-32px)]"
+      }`}
+      style={{ zIndex: 110 }}
+    >
       {isSmallScreen && (
         <div className="flex justify-center pt-2 pb-1">
           <div className="w-10 h-1 rounded-full bg-[#827875]/30" />
