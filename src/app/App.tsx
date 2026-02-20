@@ -10,11 +10,18 @@ import AgreementDetailPanel from "@/components/AgreementDetailPanel";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { Globe, Loader } from "lucide-react";
 
+const splashStart = performance.now();
+const MIN_SPLASH_MS = 5000;
+
 function dismissSplash() {
   const el = document.getElementById("splash");
   if (!el) return;
-  el.classList.add("hide");
-  setTimeout(() => el.remove(), 600);
+  const elapsed = performance.now() - splashStart;
+  const remaining = Math.max(0, MIN_SPLASH_MS - elapsed);
+  setTimeout(() => {
+    el.classList.add("hide");
+    setTimeout(() => el.remove(), 600);
+  }, remaining);
 }
 
 export default function App() {
