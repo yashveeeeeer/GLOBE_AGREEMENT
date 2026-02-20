@@ -1,0 +1,312 @@
+agreement_id,short_title,reason,party_iso3_list,party_kind_list
+11,European Union - MERCOSUR Partnership Agreement (2026),fewer_than_2_country_parties,ORG|ORG,ORG|ORG
+27,EFTA - MERCOSUR FTA (2025),fewer_than_2_country_parties,ORG|ORG,ORG|ORG
+35,Eurasian Economic Union - United Arab Emirates Economic Partnership Agreement (2025),fewer_than_2_country_parties,ORG|ARE,ORG|COUNTRY
+36,EFTA - Malaysia EPA (2025),fewer_than_2_country_parties,ORG|MYS,ORG|COUNTRY
+45,Modernised EFTA- Ukraine FTA (2025),fewer_than_2_country_parties,ORG|UKR,ORG|COUNTRY
+51,EFTA - Thailand FTA (2025),fewer_than_2_country_parties,ORG|THA,ORG|COUNTRY
+75,EU - Kyrgyzstan EPCA (2024),fewer_than_2_country_parties,ORG|KGZ,ORG|COUNTRY
+84,EFTA - India TEPA (2024),fewer_than_2_country_parties,ORG|IND,ORG|COUNTRY
+89,EU - Kenya EPA (2023),fewer_than_2_country_parties,ORG|KEN,ORG|COUNTRY
+90,Chile - EU Advanced Framework Agreement (2023),fewer_than_2_country_parties,CHL|ORG,COUNTRY|ORG
+92,MERCOSUR - Singapore FTA (2023),fewer_than_2_country_parties,ORG|SGP,ORG|COUNTRY
+97,Angola - EU SIFA (2023),fewer_than_2_country_parties,AGO|ORG,COUNTRY|ORG
+98,ACP - EU Samoa Agreement (2023),fewer_than_2_country_parties,ORG|ORG,ORG|ORG
+111,EU - New Zealand FTA (2023),fewer_than_2_country_parties,ORG|NZL,ORG|COUNTRY
+112,EFTA - Moldova FTA (2023),fewer_than_2_country_parties,ORG|MDA,ORG|COUNTRY
+115,CIS Agreement on Services and Investment (2023),fewer_than_2_country_parties,ORG,ORG
+122,AfCFTA Protocol on Investment (2023),fewer_than_2_country_parties,ORG,ORG
+125,EU - Malaysia Partnership and Cooperation Agreement (2022),fewer_than_2_country_parties,ORG|MYS,ORG|COUNTRY
+126,EU - Thailand Framework Agreement on Comprehensive Partnership and Cooperation (2022),fewer_than_2_country_parties,ORG|THA,ORG|COUNTRY
+150,Jersey - United Arab Emirates BIT (2021),fewer_than_2_country_parties,ORG|ARE,ORG|COUNTRY
+155,ASEAN Investment Facilitation Framework (2021)*,fewer_than_2_country_parties,ORG,ORG
+167,EU - United Kingdom Trade and Cooperation Agreement (2020),fewer_than_2_country_parties,ORG|GBR,ORG|COUNTRY
+193,ECOWAS Common Investment Code (ECOWIC) (2019),fewer_than_2_country_parties,ORG,ORG
+212,EU - Viet Nam FTA (2019),fewer_than_2_country_parties,ORG|VNM,ORG|COUNTRY
+213,EU - Viet Nam IPA (2019),fewer_than_2_country_parties,ORG|VNM,ORG|COUNTRY
+238,EFTA States - Indonesia EPA (2018),fewer_than_2_country_parties,ORG|IDN,ORG|COUNTRY
+254,EU - Singapore FTA (2018),fewer_than_2_country_parties,ORG|SGP,ORG|COUNTRY
+255,EU - Singapore IPA (2018),fewer_than_2_country_parties,ORG|SGP,ORG|COUNTRY
+263,EU - Japan EPA (2018),fewer_than_2_country_parties,ORG|JPN,ORG|COUNTRY
+266,EFTA  - Türkiye FTA (2018),fewer_than_2_country_parties,ORG|TUR,ORG|COUNTRY
+267,Ecuador - EFTA FTA (2018),fewer_than_2_country_parties,ECU|ORG,COUNTRY|ORG
+280,AfCFTA (2018),fewer_than_2_country_parties,ORG,ORG
+304,Armenia - EU CEPA (2017),fewer_than_2_country_parties,ARM|ORG,COUNTRY|ORG
+306,"ASEAN - Hong Kong, China SAR Investment Agreement (2017)",fewer_than_2_country_parties,ORG|HKG,ORG|COUNTRY
+318,Australia - EU Framework Agreement (2017),fewer_than_2_country_parties,AUS|ORG,COUNTRY|ORG
+328,Intra-MERCOSUR Cooperation and Facilitation Investment Protocol (2017),fewer_than_2_country_parties,ORG,ORG
+352,Canada - EU CETA (2016),fewer_than_2_country_parties,CAN|ORG,COUNTRY|ORG
+364,EFTA - Georgia FTA (2016),fewer_than_2_country_parties,ORG|GEO,ORG|COUNTRY
+370,EFTA-Philippines FTA (2016),fewer_than_2_country_parties,ORG|PHL,ORG|COUNTRY
+390,EU - Kazakhstan EPCA (2015),fewer_than_2_country_parties,ORG|KAZ,ORG|COUNTRY
+411,Eurasian Economic Union - Viet Nam FTA (2015),fewer_than_2_country_parties,ORG|VNM,ORG|COUNTRY
+440,ASEAN - India Investment Agreement (2014),fewer_than_2_country_parties,ORG|IND,ORG|COUNTRY
+451,ECOWAS - United States TIFA (2014),fewer_than_2_country_parties,ORG|USA,ORG|COUNTRY
+457,EU - Georgia Association Agreement (2014),fewer_than_2_country_parties,ORG|GEO,ORG|COUNTRY
+458,EU - Moldova Association Agreement (2014),fewer_than_2_country_parties,ORG|MDA,ORG|COUNTRY
+459,EU - Ukraine Association Agreement (2014),fewer_than_2_country_parties,ORG|UKR,ORG|COUNTRY
+466,Treaty on the Eurasian Economic Union (2014),fewer_than_2_country_parties,ORG,ORG
+510,Bosnia and Herzegovina - EFTA FTA (2013),fewer_than_2_country_parties,BIH|ORG,COUNTRY|ORG
+515,CARICOM - United States TIFA (2013),fewer_than_2_country_parties,ORG|USA,ORG|COUNTRY
+545,GCC - Peru Framework Agreement (2012),fewer_than_2_country_parties,ORG|PER,ORG|COUNTRY
+547,GCC - United States Framework Agreement (2012),fewer_than_2_country_parties,ORG|USA,ORG|COUNTRY
+554,Central America - EU Association Agreement (2012),fewer_than_2_country_parties,ORG|ORG,ORG|ORG
+555,EU - Viet Nam Framework PCA (2012),fewer_than_2_country_parties,ORG|VNM,ORG|COUNTRY
+565,EU - Iraq Cooperation Agreement (2012),fewer_than_2_country_parties,ORG|IRQ,ORG|COUNTRY
+579,Central America - Mexico FTA (2011),fewer_than_2_country_parties,ORG|MEX,ORG|COUNTRY
+581,EFTA - Montenegro FTA (2011),fewer_than_2_country_parties,ORG|MNE,ORG|COUNTRY
+595,EFTA - Hong Kong FTA (2011),fewer_than_2_country_parties,ORG|HKG,ORG|COUNTRY
+642,"EU - Korea, Republic of FTA (2010)",fewer_than_2_country_parties,ORG|KOR,ORG|COUNTRY
+647,Egypt - MERCOSUR FTA (2010),fewer_than_2_country_parties,EGY|ORG,COUNTRY|ORG
+650,EFTA - Peru FTA (2010),fewer_than_2_country_parties,ORG|PER,ORG|COUNTRY
+657,EFTA - Ukraine FTA (2010),fewer_than_2_country_parties,ORG|UKR,ORG|COUNTRY
+670,"EU - Korea, Republic of Framework Agreement (2010)",fewer_than_2_country_parties,ORG|KOR,ORG|COUNTRY
+685,BLEU (Belgium-Luxembourg Economic Union) - Montenegro BIT (2010),fewer_than_2_country_parties,ORG|MNE,ORG|COUNTRY
+694,EFTA - Serbia FTA (2009),fewer_than_2_country_parties,ORG|SRB,ORG|COUNTRY
+695,Albania - EFTA FTA (2009),fewer_than_2_country_parties,ALB|ORG,COUNTRY|ORG
+731,ASEAN - China Investment Agreement (2009),fewer_than_2_country_parties,ORG|CHN,ORG|COUNTRY
+746,GCC - EFTA FTA (2009),fewer_than_2_country_parties,ORG|ORG,ORG|ORG
+750,BLEU (Belgium-Luxembourg Economic Union) - Togo BIT (2009),fewer_than_2_country_parties,ORG|TGO,ORG|COUNTRY
+751,"ASEAN - Korea, Republic of Investment Agreement (2009)",fewer_than_2_country_parties,ORG|KOR,ORG|COUNTRY
+754,Barbados - BLEU (Belgium-Luxembourg Economic Union) BIT (2009),fewer_than_2_country_parties,BRB|ORG,COUNTRY|ORG
+772,BLEU (Belgium-Luxembourg Economic Union) - Panama BIT (2009),fewer_than_2_country_parties,ORG|PAN,ORG|COUNTRY
+780,ASEAN Comprehensive Investment Agreement (2009),fewer_than_2_country_parties,ORG,ORG
+794,BLEU (Belgium-Luxembourg Economic Union) - Tajikistan BIT (2009),fewer_than_2_country_parties,ORG|TJK,ORG|COUNTRY
+799,BLEU (Belgium-Luxembourg Economic Union) - Colombia BIT (2009),fewer_than_2_country_parties,ORG|COL,ORG|COUNTRY
+806,EU - Cameroon EPA (2009),fewer_than_2_country_parties,CMR|ORG,COUNTRY|ORG
+810,ECOWAS Supplementary Act on Investments (2008),fewer_than_2_country_parties,ORG,ORG
+813,BLEU (Belgium-Luxembourg Economic Union) - Oman BIT (2008),fewer_than_2_country_parties,ORG|OMN,ORG|COUNTRY
+814,GCC - Singapore FTA (2008),fewer_than_2_country_parties,ORG|SGP,ORG|COUNTRY
+817,Cote d'Ivoire - EC EPA (2008),fewer_than_2_country_parties,CIV|ORG,COUNTRY|ORG
+819,Colombia - EFTA FTA (2008),fewer_than_2_country_parties,COL|ORG,COUNTRY|ORG
+832,CARIFORUM - EC EPA (2008),fewer_than_2_country_parties,ORG|DOM|ORG,ORG|COUNTRY|ORG
+842,EAC - United States TIFA (2008),fewer_than_2_country_parties,ORG|USA,ORG|COUNTRY
+843,SACU - United States TIFA (2008),fewer_than_2_country_parties,ORG|USA,ORG|COUNTRY
+851,Bosnia - EC Stabilization Agreement (2008),fewer_than_2_country_parties,BIH|ORG,COUNTRY|ORG
+865,EC - Serbia Association Agreement (2008),fewer_than_2_country_parties,ORG|SRB,ORG|COUNTRY
+873,ASEAN - Japan EPA (2008),fewer_than_2_country_parties,ORG|JPN,ORG|COUNTRY
+892,Canada - EFTA FTA (2008),fewer_than_2_country_parties,CAN|ORG,COUNTRY|ORG
+915,BLEU (Belgium-Luxembourg Economic Union) - Qatar BIT (2007),fewer_than_2_country_parties,ORG|QAT,ORG|COUNTRY
+921,EU - Montenegro Association Agreement (2007),fewer_than_2_country_parties,ORG|MNE,ORG|COUNTRY
+958,COMESA Investment Agreement (2007),fewer_than_2_country_parties,ORG,ORG
+968,BLEU (Belgium-Luxembourg Economic Union) - Rwanda BIT (2007),fewer_than_2_country_parties,ORG|RWA,ORG|COUNTRY
+990,EFTA - Egypt FTA (2007),fewer_than_2_country_parties,ORG|EGY,ORG|COUNTRY
+998,CEFTA (2006),fewer_than_2_country_parties,ORG,ORG
+1000,"BLEU (Belgium-Luxembourg Economic Union) - Korea, Republic of BIT (2006)",fewer_than_2_country_parties,ORG|KOR,ORG|COUNTRY
+1022,BLEU (Belgium-Luxembourg Economic Union) - Ethiopia BIT (2006),fewer_than_2_country_parties,ORG|ETH,ORG|COUNTRY
+1039,ASEAN - United States TIFA (2006),fewer_than_2_country_parties,ORG|USA,ORG|COUNTRY
+1042,SADC Investment Protocol (2006),fewer_than_2_country_parties,ORG,ORG
+1049,BLEU (Belgium-Luxembourg Economic Union) - Mozambique BIT (2006),fewer_than_2_country_parties,ORG|MOZ,ORG|COUNTRY
+1051,Bahrain - BLEU (Belgium-Luxembourg Economic Union) BIT (2006),fewer_than_2_country_parties,BHR|ORG,COUNTRY|ORG
+1055,EFTA - SACU FTA (2006),fewer_than_2_country_parties,ORG|ORG,ORG|ORG
+1060,Albania - EC Association Agreement (2006),fewer_than_2_country_parties,ALB|ORG,COUNTRY|ORG
+1063,BLEU (Belgium-Luxembourg Economic Union) - Botswana BIT (2006),fewer_than_2_country_parties,ORG|BWA,ORG|COUNTRY
+1101,"ASEAN - Korea, Republic of Framework Agreement (2005)",fewer_than_2_country_parties,ORG|KOR,ORG|COUNTRY
+1108,BLEU (Belgium-Luxembourg Economic Union) - Mauritius BIT (2005),fewer_than_2_country_parties,ORG|MUS,ORG|COUNTRY
+1110,MERCOSUR - Peru Complementation Agreement (2005),fewer_than_2_country_parties,ORG|PER,ORG|COUNTRY
+1122,BLEU (Belgium-Luxembourg Economic Union) - Sudan BIT (2005),fewer_than_2_country_parties,ORG|SDN,ORG|COUNTRY
+1125,BLEU (Belgium-Luxembourg Economic Union) - Peru BIT (2005),fewer_than_2_country_parties,ORG|PER,ORG|COUNTRY
+1132,BLEU (Belgium-Luxembourg Economic Union) - Madagascar BIT (2005),fewer_than_2_country_parties,ORG|MDG,ORG|COUNTRY
+1153,ECO Investment Agreement (2005),fewer_than_2_country_parties,ORG,ORG
+1165,BLEU (Belgium-Luxembourg Economic Union) - China BIT (2005),fewer_than_2_country_parties,ORG|CHN,ORG|COUNTRY
+1166,BLEU (Belgium-Luxembourg Economic Union) - Nicaragua BIT (2005),fewer_than_2_country_parties,ORG|NIC,ORG|COUNTRY
+1173,BLEU (Belgium-Luxembourg Economic Union) - Guatemala BIT (2005),fewer_than_2_country_parties,ORG|GTM,ORG|COUNTRY
+1188,"BLEU (Belgium-Luxembourg Economic Union) - Congo, Democratic Republic of the BIT (2005)",fewer_than_2_country_parties,ORG|COD,ORG|COUNTRY
+1191,BLEU (Belgium-Luxembourg Economic Union) - Uganda BIT (2005),fewer_than_2_country_parties,ORG|UGA,ORG|COUNTRY
+1197,EFTA - Tunisia FTA (2004),fewer_than_2_country_parties,ORG|TUN,ORG|COUNTRY
+1211,EC - Tajikistan Partnership Agreement (2004),fewer_than_2_country_parties,ORG|TJK,ORG|COUNTRY
+1224,GCC - India Framework Agreement (2004),fewer_than_2_country_parties,ORG|IND,ORG|COUNTRY
+1235,Egypt - Mercosur Framework Agreement (2004),fewer_than_2_country_parties,EGY|ORG,COUNTRY|ORG
+1241,EFTA - Lebanon FTA (2004),fewer_than_2_country_parties,ORG|LBN,ORG|COUNTRY
+1258,Azerbaijan - BLEU (Belgium-Luxembourg Economic Union) BIT (2004),fewer_than_2_country_parties,AZE|ORG,COUNTRY|ORG
+1265,GCC - Lebanon FTA (2004),fewer_than_2_country_parties,ORG|LBN,ORG|COUNTRY
+1288,CARICOM - Costa Rica FTA (2004),fewer_than_2_country_parties,ORG|CRI,ORG|COUNTRY
+1289,BLEU (Belgium-Luxembourg Economic Union) - United Arab Emirates BIT (2004),fewer_than_2_country_parties,ORG|ARE,ORG|COUNTRY
+1290,BLEU (Belgium-Luxembourg Economic Union) - Serbia BIT (2004),fewer_than_2_country_parties,ORG|SRB,ORG|COUNTRY
+1291,BLEU (Belgium-Luxembourg Economic Union) - Bosnia and Herzegovina BIT (2004),fewer_than_2_country_parties,ORG|BIH,ORG|COUNTRY
+1298,BLEU (Belgium-Luxembourg Economic Union) - Libya BIT (2004),fewer_than_2_country_parties,ORG|LBY,ORG|COUNTRY
+1300,BIMSTEC Framework Agreement (2004),fewer_than_2_country_parties,ORG,ORG
+1311,SAFTA (2004),fewer_than_2_country_parties,ORG,ORG
+1317,ANDEAN - EC Cooperation Agreement (2003),fewer_than_2_country_parties,ORG|ORG,ORG|ORG
+1354,ASEAN - India Framework Agreement (2003),fewer_than_2_country_parties,ORG|IND,ORG|COUNTRY
+1383,BLEU (Belgium-Luxembourg Economic Union) - Ethiopia BIT (2003),fewer_than_2_country_parties,ORG|ETH,ORG|COUNTRY
+1390,Chile - EFTA FTA (2003),fewer_than_2_country_parties,CHL|ORG,COUNTRY|ORG
+1394,India - MERCOSUR Framework Agreement (2003),fewer_than_2_country_parties,IND|ORG,COUNTRY|ORG
+1430,ECOWAS Energy Protocol (2003),fewer_than_2_country_parties,ORG,ORG
+1451,Chile - EC Association Agreement (2002),fewer_than_2_country_parties,CHL|ORG,COUNTRY|ORG
+1461,ASEAN - China Framework Agreement (2002),fewer_than_2_country_parties,ORG|CHN,ORG|COUNTRY
+1504,MERCOSUR - Mexico Complementation Agreement (2002),fewer_than_2_country_parties,ORG|MEX,ORG|COUNTRY
+1510,EFTA - Singapore FTA (2002),fewer_than_2_country_parties,ORG|SGP,ORG|COUNTRY
+1517,EC - Lebanon Association Agreement (2002),fewer_than_2_country_parties,ORG|LBN,ORG|COUNTRY
+1519,BLEU (Belgium-Luxembourg Economic Union) - Thailand BIT (2002),fewer_than_2_country_parties,ORG|THA,ORG|COUNTRY
+1535,BLEU (Belgium-Luxembourg Economic Union) - Costa Rica BIT (2002),fewer_than_2_country_parties,ORG|CRI,ORG|COUNTRY
+1538,United States - WAEMU TIFA (2002),fewer_than_2_country_parties,USA|ORG,COUNTRY|ORG
+1540,Algeria - EC Association Agreement (2002),fewer_than_2_country_parties,DZA|ORG,COUNTRY|ORG
+1547,Belarus - BLEU (Belgium-Luxembourg Economic Union) BIT (2002),fewer_than_2_country_parties,BLR|ORG,COUNTRY|ORG
+1558,CACM Agreement on Investment and Trade Services (2002),fewer_than_2_country_parties,ORG,ORG
+1568,Central America - Panama FTA (2002),fewer_than_2_country_parties,ORG|PAN,ORG|COUNTRY
+1602,EC - OCT Association (2001),fewer_than_2_country_parties,ORG|ORG,ORG|ORG
+1606,EC - Pakistan Cooperation Agreement (2001),fewer_than_2_country_parties,ORG|PAK,ORG|COUNTRY
+1615,BLEU (Belgium-Luxembourg Economic Union) - Croatia BIT (2001),fewer_than_2_country_parties,ORG|HRV,ORG|COUNTRY
+1617,COMESA - United States TIFA (2001),fewer_than_2_country_parties,ORG|USA,ORG|COUNTRY
+1661,EC - Egypt Association Agreement (2001),fewer_than_2_country_parties,EGY|ORG,COUNTRY|ORG
+1664,EFTA - Jordan FTA (2001),fewer_than_2_country_parties,ORG|JOR,ORG|COUNTRY
+1665,EFTA (2001),fewer_than_2_country_parties,ORG,ORG
+1675,Armenia - BLEU (Belgium-Luxembourg Economic Union) BIT (2001),fewer_than_2_country_parties,ARM|ORG,COUNTRY|ORG
+1685,BLEU (Belgium-Luxembourg Economic Union) - Zambia BIT (2001),fewer_than_2_country_parties,ORG|ZMB,ORG|COUNTRY
+1692,BLEU (Belgium-Luxembourg Economic Union) - Comoros BIT (2001),fewer_than_2_country_parties,ORG|COM,ORG|COUNTRY
+1693,BLEU (Belgium-Luxembourg Economic Union) - Benin BIT (2001),fewer_than_2_country_parties,BEN|ORG,COUNTRY|ORG
+1694,BLEU (Belgium-Luxembourg Economic Union) - Burkina Faso BIT (2001),fewer_than_2_country_parties,ORG|BFA,ORG|COUNTRY
+1726,CARICOM Single Market (2001),fewer_than_2_country_parties,ORG,ORG
+1736,BLEU (Belgium-Luxembourg Economic Union) - Saudi Arabia BIT (2001),fewer_than_2_country_parties,ORG|SAU,ORG|COUNTRY
+1743,EC - Macedonia Association Agreement (2001),fewer_than_2_country_parties,ORG|MKD,ORG|COUNTRY
+1750,Mexico - EC Cooperation Agreement (2001),fewer_than_2_country_parties,ORG|MEX,ORG|COUNTRY
+1792,EFTA - Mexico FTA (2000),fewer_than_2_country_parties,ORG|MEX,ORG|COUNTRY
+1823,BLEU (Belgium-Luxembourg Economic Union) - Kuwait BIT (2000),fewer_than_2_country_parties,ORG|KWT,ORG|COUNTRY
+1851,CARICOM - Cuba Cooperation Agreement (2000),fewer_than_2_country_parties,ORG|CUB,ORG|COUNTRY
+1858,Cotonou Agreement (2000),fewer_than_2_country_parties,ORG|ORG,ORG|ORG
+1861,EFTA - Macedonia FTA (2000),fewer_than_2_country_parties,ORG|MKD,ORG|COUNTRY
+1873,Bangladesh - EC Cooperation Agreement (2000),fewer_than_2_country_parties,BGD|ORG,COUNTRY|ORG
+1924,BLEU (Belgium-Luxembourg Economic Union) - Yemen BIT (2000),fewer_than_2_country_parties,ORG|YEM,ORG|COUNTRY
+1941,EAC Treaty (1999),fewer_than_2_country_parties,ORG,ORG
+1953,EC - Turkmenistan Interim Trade Agreement (1999),fewer_than_2_country_parties,ORG|TKM,ORG|COUNTRY
+1965,Central America - Chile FTA (1999),fewer_than_2_country_parties,ORG|CHL,ORG|COUNTRY
+1969,BLEU (Belgium-Luxembourg Economic Union) - El Salvador BIT (1999),fewer_than_2_country_parties,ORG|SLV,ORG|COUNTRY
+1971,EC - South Africa Cooperation Agreement (1999),fewer_than_2_country_parties,ORG|ZAF,ORG|COUNTRY
+1992,BLEU (Belgium-Luxembourg Economic Union) - Lebanon BIT (1999),fewer_than_2_country_parties,ORG|LBN,ORG|COUNTRY
+2026,ANDEAN - Canada Cooperation Agreement (1999),fewer_than_2_country_parties,ORG|CAN,ORG|COUNTRY
+2048,BLEU (Belgium-Luxembourg Economic Union) - Morocco BIT (1999),fewer_than_2_country_parties,ORG|MAR,ORG|COUNTRY
+2055,BLEU (Belgium-Luxembourg Economic Union) - Côte d'Ivoire BIT (1999),fewer_than_2_country_parties,ORG|CIV,ORG|COUNTRY
+2068,BLEU (Belgium-Luxembourg Economic Union) - Egypt BIT (1999),fewer_than_2_country_parties,ORG|EGY,ORG|COUNTRY
+2078,"BLEU (Belgium-Luxembourg Economic Union) - Macedonia, The former Yugoslav Republic of BIT (1999)",fewer_than_2_country_parties,ORG|MKD,ORG|COUNTRY
+2092,BLEU (Belgium-Luxembourg Economic Union) - Slovenia BIT (1999),fewer_than_2_country_parties,ORG|SVN,ORG|COUNTRY
+2093,Albania - BLEU (Belgium-Luxembourg Economic Union) BIT (1999),fewer_than_2_country_parties,ALB|ORG,COUNTRY|ORG
+2104,BLEU (Belgium-Luxembourg Economic Union) - Brazil BIT (1999),fewer_than_2_country_parties,ORG|BRA,ORG|COUNTRY
+2118,EFTA - Palestine Interim Agreement (1998),fewer_than_2_country_parties,ORG|PSE,ORG|COUNTRY
+2136,ANDEAN - United States Trade and Investment Council (1998),fewer_than_2_country_parties,ORG|USA,ORG|COUNTRY
+2163,BLEU (Belgium-Luxembourg Economic Union) - Mexico BIT (1998),fewer_than_2_country_parties,ORG|MEX,ORG|COUNTRY
+2166,CARICOM - Dominican Republic FTA (1998),fewer_than_2_country_parties,ORG|DOM,ORG|COUNTRY
+2169,BLEU (Belgium-Luxembourg Economic Union) - South Africa BIT (1998),fewer_than_2_country_parties,ORG|ZAF,ORG|COUNTRY
+2198,Canada - MERCOSUR Cooperation Agreement (1998),fewer_than_2_country_parties,CAN|ORG,COUNTRY|ORG
+2209,BLEU (Belgium-Luxembourg Economic Union) - Gabon BIT (1998),fewer_than_2_country_parties,ORG|GAB,ORG|COUNTRY
+2213,EU - Turkmenistan PCA (1998),fewer_than_2_country_parties,ORG|TKM,ORG|COUNTRY
+2214,BLEU (Belgium-Luxembourg Economic Union) - Cuba BIT (1998),fewer_than_2_country_parties,ORG|CUB,ORG|COUNTRY
+2228,BLEU (Belgium-Luxembourg Economic Union) - Pakistan BIT (1998),fewer_than_2_country_parties,ORG|PAK,ORG|COUNTRY
+2232,BLEU (Belgium-Luxembourg Economic Union) - Uzbekistan BIT (1998),fewer_than_2_country_parties,ORG|UZB,ORG|COUNTRY
+2234,BLEU (Belgium-Luxembourg Economic Union) - Kazakhstan BIT (1998),fewer_than_2_country_parties,ORG|KAZ,ORG|COUNTRY
+2235,ANDEAN - MERCOSUR Framework Agreement (1998),fewer_than_2_country_parties,ORG|ORG,ORG|ORG
+2236,Dominican Republic - Central America FTA (1998),fewer_than_2_country_parties,ORG|DOM,ORG|COUNTRY
+2247,"BLEU (Belgium-Luxembourg Economic Union) - Venezuela, Bolivarian Republic of BIT (1998)",fewer_than_2_country_parties,ORG|VEN,ORG|COUNTRY
+2295,BLEU (Belgium-Luxembourg Economic Union) - Philippines BIT (1998),fewer_than_2_country_parties,ORG|PHL,ORG|COUNTRY
+2306,MERCOSUR Services Protocol (1997),fewer_than_2_country_parties,ORG,ORG
+2320,EC - Yemen Cooperation Agreement (1997),fewer_than_2_country_parties,ORG|YEM,ORG|COUNTRY
+2321,EC - Jordan Association Agreement (1997),fewer_than_2_country_parties,ORG|JOR,ORG|COUNTRY
+2332,BLEU (Belgium-Luxembourg Economic Union) - India BIT (1997),fewer_than_2_country_parties,ORG|IND,ORG|COUNTRY
+2344,BLEU (Belgium-Luxembourg Economic Union) - Lithuania BIT (1997),fewer_than_2_country_parties,ORG|LTU,ORG|COUNTRY
+2401,EFTA - Morocco FTA (1997),fewer_than_2_country_parties,ORG|MAR,ORG|COUNTRY
+2433,Cambodia - EC Cooperation Agreement (1997),fewer_than_2_country_parties,KHM|ORG,COUNTRY|ORG
+2434,EC - Lao Cooperation Agreement (1997),fewer_than_2_country_parties,ORG|LAO,ORG|COUNTRY
+2480,EC - Palestine Association Agreement (1997),fewer_than_2_country_parties,ORG|PSE,ORG|COUNTRY
+2492,BLEU (Belgium-Luxembourg Economic Union) - Tunisia BIT (1997),fewer_than_2_country_parties,ORG|TUN,ORG|COUNTRY
+2496,Bolivia - Mercosur Complementation Agreement (1996),fewer_than_2_country_parties,BOL|ORG,COUNTRY|ORG
+2530,"EC - Korea, Republic of Cooperation Agreement (1996)",fewer_than_2_country_parties,ORG|KOR,ORG|COUNTRY
+2547,"BLEU (Belgium-Luxembourg Economic Union) - Hong Kong, China SAR BIT (1996)",fewer_than_2_country_parties,ORG|HKG,ORG|COUNTRY
+2603,Chile - Mercosur Complementation Agreement (1996),fewer_than_2_country_parties,CHL|ORG,COUNTRY|ORG
+2605,EC - Uzbekistan Cooperation Agreement (1996),fewer_than_2_country_parties,ORG|UZB,ORG|COUNTRY
+2627,"BLEU (Belgium-Luxembourg Economic Union) - Moldova, Republic of BIT (1996)",fewer_than_2_country_parties,ORG|MDA,ORG|COUNTRY
+2629,BLEU (Belgium-Luxembourg Economic Union) - Ukraine BIT (1996),fewer_than_2_country_parties,ORG|UKR,ORG|COUNTRY
+2648,Armenia - EC Cooperation Agreement (1996),fewer_than_2_country_parties,ARM|ORG,COUNTRY|ORG
+2649,Azerbaijan - EC Cooperation Agreement (1996),fewer_than_2_country_parties,AZE|ORG,COUNTRY|ORG
+2650,EC - Georgia Cooperation Agreement (1996),fewer_than_2_country_parties,ORG|GEO,ORG|COUNTRY
+2659,BLEU (Belgium-Luxembourg Economic Union) - Latvia BIT (1996),fewer_than_2_country_parties,ORG|LVA,ORG|COUNTRY
+2683,BLEU (Belgium-Luxembourg Economic Union) - Romania BIT (1996),fewer_than_2_country_parties,ORG|ROU,ORG|COUNTRY
+2689,EC - Morocco Association Agreement (1996),fewer_than_2_country_parties,ORG|MAR,ORG|COUNTRY
+2707,BLEU (Belgium-Luxembourg Economic Union) - Estonia BIT (1996),fewer_than_2_country_parties,ORG|EST,ORG|COUNTRY
+2724,Ankara Agreement (1995),fewer_than_2_country_parties,ORG|TUR,ORG|COUNTRY
+2728,ASEAN Services (1995),fewer_than_2_country_parties,ORG,ORG
+2729,EC - Mercosur Cooperation Agreement (1995),fewer_than_2_country_parties,ORG|ORG,ORG|ORG
+2749,EC - Israel Association Agreement (1995),fewer_than_2_country_parties,ORG|ISR,ORG|COUNTRY
+2750,EC - Nepal Cooperation Agreement (1995),fewer_than_2_country_parties,ORG|NPL,ORG|COUNTRY
+2774,Russian Federation - Yugoslavia (former) BIT (1995),fewer_than_2_country_parties,RUS|ORG,COUNTRY|ORG
+2817,EC - Vietnam Cooperation Agreement (1995),fewer_than_2_country_parties,ORG|VNM,ORG|COUNTRY
+2818,EC - Tunisia Association Agreement (1995),fewer_than_2_country_parties,ORG|TUN,ORG|COUNTRY
+2911,Belarus - EC Cooperation Agreement (1995),fewer_than_2_country_parties,BLR|ORG,COUNTRY|ORG
+2923,EC - Kyrgyzstan Cooperation Agreement (1995),fewer_than_2_country_parties,ORG|KGZ,ORG|COUNTRY
+2929,EC - Kazakhstan Cooperation Agreement (1995),fewer_than_2_country_parties,ORG|KAZ,ORG|COUNTRY
+2942,The Energy Charter Treaty (1994),fewer_than_2_country_parties,ORG,ORG
+2957,EC - Moldova PCA (1994),fewer_than_2_country_parties,ORG|MDA,ORG|COUNTRY
+3016,MERCOSUR Investment Protocol (extra) (1994),fewer_than_2_country_parties,ORG,ORG
+3021,EC - Sri Lanka Cooperation Agreement (1994),fewer_than_2_country_parties,ORG|LKA,ORG|COUNTRY
+3035,EC - Russia PCA (1994),fewer_than_2_country_parties,ORG|RUS,ORG|COUNTRY
+3043,EC - Ukraine Cooperation Agreement (1994),fewer_than_2_country_parties,ORG|UKR,ORG|COUNTRY
+3137,MERCOSUR Investment Protocol (intra) (1994),fewer_than_2_country_parties,ORG,ORG
+3139,WAEMU Treaty (1994),fewer_than_2_country_parties,ORG,ORG
+3141,EC - India Cooperation Agreement (1993),fewer_than_2_country_parties,ORG|IND,ORG|COUNTRY
+3157,COMESA Treaty (1993),fewer_than_2_country_parties,ORG,ORG
+3192,Revised ECOWAS Treaty (1993),fewer_than_2_country_parties,ORG,ORG
+3201,BLEU (Belgium-Luxembourg Economic Union) - Georgia BIT (1993),fewer_than_2_country_parties,ORG|GEO,ORG|COUNTRY
+3309,CARICOM - Venezuela FTA (1992),fewer_than_2_country_parties,ORG|VEN,ORG|COUNTRY
+3311,BLEU (Belgium-Luxembourg Economic Union) - Paraguay BIT (1992),fewer_than_2_country_parties,ORG|PRY,ORG|COUNTRY
+3325,EFTA - Israel FTA (1992),fewer_than_2_country_parties,ORG|ISR,ORG|COUNTRY
+3327,SADC Treaty (1992),fewer_than_2_country_parties,ORG,ORG
+3336,BLEU (Belgium-Luxembourg Economic Union) - Chile BIT (1992),fewer_than_2_country_parties,ORG|CHL,ORG|COUNTRY
+3342,Brazil - EC Cooperation Agreement (1992),fewer_than_2_country_parties,BRA|ORG,COUNTRY|ORG
+3349,EEC - Mongolia Trade Cooperation Agreement (1992),fewer_than_2_country_parties,ORG|MNG,ORG|COUNTRY
+3351,EC - Macao Trade Agreement (1992),fewer_than_2_country_parties,ORG|MAC,ORG|COUNTRY
+3369,EC - EFTA (1992),fewer_than_2_country_parties,ORG|ORG,ORG|ORG
+3391,BLEU (Belgium-Luxembourg Economic Union) - Mongolia BIT (1992),fewer_than_2_country_parties,ORG|MNG,ORG|COUNTRY
+3399,EC - Paraguay Cooperation Agreement (1992),fewer_than_2_country_parties,ORG|PRY,ORG|COUNTRY
+3417,BLEU (Belgium-Luxembourg Economic Union) - Uruguay BIT (1991),fewer_than_2_country_parties,ORG|URY,ORG|COUNTRY
+3418,EC - Uruguay Cooperation Agreement (1991),fewer_than_2_country_parties,ORG|URY,ORG|COUNTRY
+3459,AU Treaty (1991),fewer_than_2_country_parties,ORG,ORG
+3476,Algeria - BLEU (Belgium-Luxembourg Economic Union) BIT (1991),fewer_than_2_country_parties,DZA|ORG,COUNTRY|ORG
+3488,BLEU (Belgium-Luxembourg Economic Union) - Cyprus BIT (1991),fewer_than_2_country_parties,ORG|CYP,ORG|COUNTRY
+3490,BLEU (Belgium-Luxembourg Economic Union) - Viet Nam BIT (1991),fewer_than_2_country_parties,ORG|VNM,ORG|COUNTRY
+3537,Arab Maghreb Union Investment Agreement (1990),fewer_than_2_country_parties,ORG,ORG
+3543,Argentina - BLEU (Belgium-Luxembourg Economic Union) BIT (1990),fewer_than_2_country_parties,ARG|ORG,COUNTRY|ORG
+3552,"BLEU (Belgium-Luxembourg Economic Union) - Bolivia, Plurinational State of BIT (1990)",fewer_than_2_country_parties,ORG|BOL,ORG|COUNTRY
+3597,BLEU (Belgium-Luxembourg Economic Union) - Slovakia BIT (1989),fewer_than_2_country_parties,ORG|SVK,ORG|COUNTRY
+3598,BLEU (Belgium-Luxembourg Economic Union) - Czech Republic BIT (1989),fewer_than_2_country_parties,ORG|CZE,ORG|COUNTRY
+3599,BLEU (Belgium-Luxembourg Economic Union) - Burundi BIT (1989),fewer_than_2_country_parties,ORG|BDI,ORG|COUNTRY
+3626,BLEU (Belgium-Luxembourg Economic Union) - Bulgaria BIT (1988),fewer_than_2_country_parties,ORG|BGR,ORG|COUNTRY
+3638,EC - GCC Cooperation Agreement (1988),fewer_than_2_country_parties,ORG|ORG,ORG|ORG
+3654,ASEAN Investment Agreement (1987),fewer_than_2_country_parties,ORG,ORG
+3664,BLEU (Belgium-Luxembourg Economic Union) - Poland BIT (1987),fewer_than_2_country_parties,ORG|POL,ORG|COUNTRY
+3671,BLEU (Belgium-Luxembourg Economic Union) - Malta BIT (1987),fewer_than_2_country_parties,ORG|MLT,ORG|COUNTRY
+3680,BLEU (Belgium-Luxembourg Economic Union) - Turkey BIT (1986),fewer_than_2_country_parties,ORG|TUR,ORG|COUNTRY
+3685,BLEU (Belgium-Luxembourg Economic Union) - Hungary BIT (1986),fewer_than_2_country_parties,ORG|HUN,ORG|COUNTRY
+3691,BLEU (Belgium-Luxembourg Economic Union) - Thailand BIT (1986),fewer_than_2_country_parties,ORG|THA,ORG|COUNTRY
+3708,BLEU (Belgium-Luxembourg Economic Union) - Liberia BIT (1985),fewer_than_2_country_parties,ORG|LBR,ORG|COUNTRY
+3710,China - EC Trade and Cooperation Agreement (1985),fewer_than_2_country_parties,CHN|ORG,COUNTRY|ORG
+3733,BLEU (Belgium-Luxembourg Economic Union) - China BIT (1984),fewer_than_2_country_parties,ORG|CHN,ORG|COUNTRY
+3744,BLEU (Belgium-Luxembourg Economic Union) - Mauritania BIT (1983),fewer_than_2_country_parties,ORG|MRT,ORG|COUNTRY
+3745,BLEU (Belgium-Luxembourg Economic Union) - Rwanda BIT (1983),fewer_than_2_country_parties,ORG|RWA,ORG|COUNTRY
+3750,ECCAS Treaty (1983),fewer_than_2_country_parties,ORG,ORG
+3770,BLEU (Belgium-Luxembourg Economic Union) - Sri Lanka BIT (1982),fewer_than_2_country_parties,ORG|LKA,ORG|COUNTRY
+3775,ECGLC Investment Code (1982),fewer_than_2_country_parties,ORG,ORG
+3778,GCC Economic Agreement (1981),fewer_than_2_country_parties,ORG,ORG
+3780,OIC Investment Agreement (1981),fewer_than_2_country_parties,ORG,ORG
+3782,Bangladesh - BLEU (Belgium-Luxembourg Economic Union) BIT (1981),fewer_than_2_country_parties,BGD|ORG,COUNTRY|ORG
+3790,Arab Investment Agreement (1980),fewer_than_2_country_parties,ORG,ORG
+3794,LAIA Treaty (1980),fewer_than_2_country_parties,ORG,ORG
+3795,SPARTECA (1980),fewer_than_2_country_parties,ORG,ORG
+3804,BLEU (Belgium-Luxembourg Economic Union) - Cameroon BIT (1980),fewer_than_2_country_parties,ORG|CMR,ORG|COUNTRY
+3805,ASEAN - EU Cooperation Agreement (1980),fewer_than_2_country_parties,ORG|ORG,ORG|ORG
+3807,BLEU (Belgium-Luxembourg Economic Union) - Malaysia BIT (1979),fewer_than_2_country_parties,ORG|MYS,ORG|COUNTRY
+3813,ECOWAS Protocol on Movement of Persons and Establishment (1979),fewer_than_2_country_parties,ORG,ORG
+3821,BLEU (Belgium-Luxembourg Economic Union) - Singapore BIT (1978),fewer_than_2_country_parties,ORG|SGP,ORG|COUNTRY
+3830,BLEU (Belgium-Luxembourg Economic Union) - Romania BIT (1978),fewer_than_2_country_parties,ORG|ROU,ORG|COUNTRY
+3844,BLEU (Belgium-Luxembourg Economic Union) - Egypt BIT (1977),fewer_than_2_country_parties,ORG|EGY,ORG|COUNTRY
+3864,ECOWAS Treaty (1975),fewer_than_2_country_parties,ORG,ORG
+3868,"BLEU (Belgium-Luxembourg Economic Union) - Korea, Republic of BIT (1974)",fewer_than_2_country_parties,ORG|KOR,ORG|COUNTRY
+3882,CARICOM Treaty (1973),fewer_than_2_country_parties,ORG,ORG
+3889,CEMAC Convention on Liberalization (1972),fewer_than_2_country_parties,ORG,ORG
+3902,Arab League Investment Agreement (1970),fewer_than_2_country_parties,ORG,ORG
+3909,Cartagena Agreement (1969),fewer_than_2_country_parties,ORG,ORG
+3931,CEMAC Investment (1965),fewer_than_2_country_parties,ORG,ORG
+3940,BLEU (Belgium-Luxembourg Economic Union) - Morocco BIT (1965),fewer_than_2_country_parties,ORG|MAR,ORG|COUNTRY
+3947,BLEU (Belgium-Luxembourg Economic Union) - Tunisia BIT (1964),fewer_than_2_country_parties,ORG|TUN,ORG|COUNTRY
+3978,Central American Economic Integration (1960),fewer_than_2_country_parties,ORG,ORG
+3980,EU Treaty (1957),fewer_than_2_country_parties,ORG,ORG
+3981,IFD Agreement,fewer_than_2_country_parties,ORG,ORG
+3982,COMESA Investment Agreement (2017),fewer_than_2_country_parties,ORG,ORG

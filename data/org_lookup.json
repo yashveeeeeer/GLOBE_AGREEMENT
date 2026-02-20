@@ -1,0 +1,212 @@
+{
+  "EU (European Union)": {
+    "display_name": "European Union",
+    "lat": 50.85,
+    "lng": 4.35,
+    "continent": "Europe"
+  },
+  "EFTA (European Free Trade Association)": {
+    "display_name": "EFTA",
+    "lat": 46.2,
+    "lng": 6.14,
+    "continent": "Europe"
+  },
+  "MERCOSUR (Mercado Común Sudamericano)": {
+    "display_name": "MERCOSUR",
+    "lat": -34.88,
+    "lng": -56.17,
+    "continent": "South America"
+  },
+  "ASEAN (Association of South-East Asian Nations)": {
+    "display_name": "ASEAN",
+    "lat": -6.21,
+    "lng": 106.85,
+    "continent": "Asia"
+  },
+  "BLEU (Belgium-Luxembourg Economic Union)": {
+    "display_name": "BLEU",
+    "lat": 50.85,
+    "lng": 4.35,
+    "continent": "Europe"
+  },
+  "ECOWAS (Economic Community of West African States)": {
+    "display_name": "ECOWAS",
+    "lat": 9.06,
+    "lng": 7.49,
+    "continent": "Africa"
+  },
+  "GCC (Gulf Cooperation Council)": {
+    "display_name": "GCC",
+    "lat": 24.71,
+    "lng": 46.68,
+    "continent": "Asia"
+  },
+  "CARICOM (Caribbean Community)": {
+    "display_name": "CARICOM",
+    "lat": 6.8,
+    "lng": -58.16,
+    "continent": "South America"
+  },
+  "ANCOM (Andean Community)": {
+    "display_name": "Andean Community",
+    "lat": -12.05,
+    "lng": -77.04,
+    "continent": "South America"
+  },
+  "COMESA (Common Market for Eastern and Southern Africa)": {
+    "display_name": "COMESA",
+    "lat": -15.39,
+    "lng": 28.32,
+    "continent": "Africa"
+  },
+  "CIS (Commonwealth of Independent States)": {
+    "display_name": "CIS",
+    "lat": 53.9,
+    "lng": 27.57,
+    "continent": "Europe"
+  },
+  "AU (African Union)": {
+    "display_name": "African Union",
+    "lat": 9.02,
+    "lng": 38.75,
+    "continent": "Africa"
+  },
+  "ACP (African, Caribbean and Pacific Group of States)": {
+    "display_name": "ACP",
+    "lat": 50.85,
+    "lng": 4.35,
+    "continent": "Europe"
+  },
+  "EAC (East African Community)": {
+    "display_name": "EAC",
+    "lat": -3.37,
+    "lng": 36.68,
+    "continent": "Africa"
+  },
+  "SACU (Southern African Customs Union)": {
+    "display_name": "SACU",
+    "lat": -22.56,
+    "lng": 17.08,
+    "continent": "Africa"
+  },
+  "SADC (Southern African Development Community)": {
+    "display_name": "SADC",
+    "lat": -24.65,
+    "lng": 25.93,
+    "continent": "Africa"
+  },
+  "ECO (Economic Cooperation Organization)": {
+    "display_name": "ECO",
+    "lat": 35.69,
+    "lng": 51.39,
+    "continent": "Asia"
+  },
+  "BIMSTEC (Bay of Bengal Initiative for Multi-Sectoral Technical and Economic Cooperation)": {
+    "display_name": "BIMSTEC",
+    "lat": 23.81,
+    "lng": 90.41,
+    "continent": "Asia"
+  },
+  "SAFTA (South Asian Free Trade Area Accord)": {
+    "display_name": "SAFTA",
+    "lat": 27.72,
+    "lng": 85.32,
+    "continent": "Asia"
+  },
+  "CACM (Central American Common Market)": {
+    "display_name": "CACM",
+    "lat": 14.63,
+    "lng": -90.51,
+    "continent": "North America"
+  },
+  "CEFTA (Central European Free Trade Agreement)": {
+    "display_name": "CEFTA",
+    "lat": 50.85,
+    "lng": 4.35,
+    "continent": "Europe"
+  },
+  "WAEMU (West African Economic and Monetary Union)": {
+    "display_name": "WAEMU",
+    "lat": 12.37,
+    "lng": -1.52,
+    "continent": "Africa"
+  },
+  "LAIA (Latin American Integration Association)": {
+    "display_name": "LAIA",
+    "lat": -34.88,
+    "lng": -56.17,
+    "continent": "South America"
+  },
+  "League of Arab States": {
+    "display_name": "League of Arab States",
+    "lat": 30.04,
+    "lng": 31.24,
+    "continent": "Africa"
+  },
+  "Eurasian Economic Union": {
+    "display_name": "Eurasian Economic Union",
+    "lat": 55.75,
+    "lng": 37.62,
+    "continent": "Europe"
+  },
+  "Channel Islands (Guernsey, Jersey)": {
+    "display_name": "Channel Islands",
+    "lat": 49.21,
+    "lng": -2.13,
+    "continent": "Europe"
+  },
+  "ECCAS (Economic Community of Central African States)": {
+    "display_name": "ECCAS",
+    "lat": 0.39,
+    "lng": 9.45,
+    "continent": "Africa"
+  },
+  "CEPGL (Economic Community of the Great Lakes Countries)": {
+    "display_name": "CEPGL",
+    "lat": -1.7,
+    "lng": 29.26,
+    "continent": "Africa"
+  },
+  "CEMAC (Economic and Monetary Community of Central Africa)": {
+    "display_name": "CEMAC",
+    "lat": 4.36,
+    "lng": 18.56,
+    "continent": "Africa"
+  },
+  "SPARTECA (South Pacific Regional Trade and Economic Cooperation Agreement)": {
+    "display_name": "SPARTECA",
+    "lat": -18.14,
+    "lng": 178.44,
+    "continent": "Oceania"
+  },
+  "OCT (Overseas Countries and Territories)": {
+    "display_name": "OCT",
+    "lat": 50.85,
+    "lng": 4.35,
+    "continent": "Europe"
+  },
+  "Investment Facilitation for Development (WTO JSI) members": {
+    "display_name": "WTO IFD",
+    "lat": 46.2,
+    "lng": 6.14,
+    "continent": "Europe"
+  },
+  "Energy Charter Treaty members": {
+    "display_name": "Energy Charter",
+    "lat": 50.85,
+    "lng": 4.35,
+    "continent": "Europe"
+  },
+  "UMA (Arab Maghreb Union)": {
+    "display_name": "Arab Maghreb Union",
+    "lat": 33.97,
+    "lng": -6.85,
+    "continent": "Africa"
+  },
+  "OIC Investment Agreement members": {
+    "display_name": "OIC",
+    "lat": 21.49,
+    "lng": 39.19,
+    "continent": "Asia"
+  }
+}
