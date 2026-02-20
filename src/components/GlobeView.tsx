@@ -252,6 +252,8 @@ function GlobeViewInner({
 
   // ── Arc callbacks (single layer) ─────────────────────────────────────
 
+  const ARC_TRANSPARENT = "rgba(0,0,0,0)";
+
   const arcColorFn = useCallback(
     (d: object) => {
       const e = d as Edge;
@@ -261,11 +263,11 @@ function GlobeViewInner({
           : getTypeColorRgba(e.agreement_type_code, 0.12);
         return [c, c];
       }
-      const hl = nightMode ? NIGHT_ARC_HIGHLIGHT : ARC_HIGHLIGHT;
-      const dim = nightMode ? NIGHT_ARC_DIM : ARC_DIM;
-      if (isEdgeConnectedToCountry(e, highlightIso3))
+      if (isEdgeConnectedToCountry(e, highlightIso3)) {
+        const hl = nightMode ? NIGHT_ARC_HIGHLIGHT : ARC_HIGHLIGHT;
         return [hl, hl];
-      return [dim, dim];
+      }
+      return [ARC_TRANSPARENT, ARC_TRANSPARENT];
     },
     [highlightIso3, nightMode]
   );
@@ -274,7 +276,7 @@ function GlobeViewInner({
     (d: object) => {
       if (!highlightIso3) return 0.08;
       if (isEdgeConnectedToCountry(d as Edge, highlightIso3)) return 0.35;
-      return 0.02;
+      return 0;
     },
     [highlightIso3]
   );
