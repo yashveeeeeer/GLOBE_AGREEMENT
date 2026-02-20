@@ -13,12 +13,13 @@ import { Globe, Loader } from "lucide-react";
 const splashStart = performance.now();
 const MIN_SPLASH_MS = 5000;
 
-function dismissSplash() {
+function dismissSplash(onReveal?: () => void) {
   const el = document.getElementById("splash");
   if (!el) return;
   const elapsed = performance.now() - splashStart;
   const remaining = Math.max(0, MIN_SPLASH_MS - elapsed);
   setTimeout(() => {
+    onReveal?.();
     el.classList.add("hide");
     setTimeout(() => el.remove(), 600);
   }, remaining);
@@ -29,6 +30,7 @@ export default function App() {
   const [countries, setCountries] = useState<CountryIndex[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [revealed, setRevealed] = useState(false);
   const [meta, setMeta] = useState<DataMeta | null>(null);
   const [filters, setFilters] = useState<FilterState | null>(null);
 
@@ -63,12 +65,12 @@ export default function App() {
             : defaultFilters(m)
         );
         setLoading(false);
-        dismissSplash();
+        dismissSplash(() => setRevealed(true));
       } catch (err) {
         if (!cancelled) {
           setError(err instanceof Error ? err.message : "Unknown error");
           setLoading(false);
-          dismissSplash();
+          dismissSplash(() => setRevealed(true));
         }
       }
     }
@@ -176,7 +178,7 @@ export default function App() {
   }
 
   return (
-    <div className="w-full h-full relative overflow-hidden bg-[#FAF9F6]">
+    <div className={`w-full h-full relative overflow-hidden bg-[#FAF9F6]${revealed ? " globe-enter" : ""}`} style={revealed ? undefined : { opacity: 0 }}>
       <ErrorBoundary>
         <GlobeView
           edges={filteredEdges}

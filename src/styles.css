@@ -98,6 +98,25 @@
   }
 }
 
+@keyframes globe-emerge {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.globe-enter {
+  animation: globe-emerge 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 @media (max-width: 640px) {
   .glass-panel {
     border-radius: 8px;
