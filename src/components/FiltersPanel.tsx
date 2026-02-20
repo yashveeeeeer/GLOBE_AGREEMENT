@@ -407,23 +407,37 @@ function FiltersPanelInner({
         {/* Country Selection */}
         <section>
           <h3 className="text-xs font-semibold text-[#827875] uppercase tracking-wider mb-2">
-            Search Country
+            Country
           </h3>
-          <button
-            onClick={() => setCountriesOpen((v) => !v)}
-            className="w-full flex items-center justify-between px-3 py-2 rounded-lg border border-[#827875]/20 bg-white/60 text-xs text-[#3a3635] hover:border-[#3790C9]/40 transition-colors cursor-pointer"
-          >
-            <span>
-              {selectedCountries.length > 0
-                ? `${selectedCountries.length} selected`
-                : "Select countries"}
-            </span>
-            {countriesOpen ? (
-              <ChevronDown size={14} className="text-[#827875]" />
+          <div className="relative">
+            <Search
+              size={14}
+              className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#827875] pointer-events-none"
+            />
+            <input
+              type="text"
+              placeholder={selectedCountries.length > 0 ? `${selectedCountries.length} selected — search more` : "Search countries..."}
+              value={countryQuery}
+              onFocus={() => setCountriesOpen(true)}
+              onChange={(e) => { setCountryQuery(e.target.value); setCountriesOpen(true); }}
+              className="w-full bg-white/60 border border-[#827875]/20 rounded-lg pl-8 pr-8 py-2 text-xs text-[#3a3635] placeholder-[#827875] outline-none focus:border-[#3790C9]/40 transition-colors"
+            />
+            {countryQuery ? (
+              <button
+                onClick={() => setCountryQuery("")}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#827875] hover:text-[#3790C9] cursor-pointer"
+              >
+                <X size={12} />
+              </button>
             ) : (
-              <ChevronRight size={14} className="text-[#827875]" />
+              <button
+                onClick={() => setCountriesOpen((v) => !v)}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#827875] cursor-pointer"
+              >
+                {countriesOpen ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+              </button>
             )}
-          </button>
+          </div>
           {selectedCountries.length > 0 && (
             <div className="flex flex-wrap gap-1 mt-2">
               {selectedCountries.slice(0, 8).map((name) => (
@@ -444,31 +458,10 @@ function FiltersPanelInner({
           <div
             className={`mt-2 overflow-y-auto transition-all duration-200 ${
               countriesOpen
-                ? "max-h-56 opacity-100"
+                ? "max-h-48 opacity-100"
                 : "max-h-0 opacity-0 pointer-events-none"
             }`}
           >
-            <div className="relative mb-2">
-              <Search
-                size={14}
-                className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#827875]"
-              />
-              <input
-                type="text"
-                placeholder="Type country name..."
-                value={countryQuery}
-                onChange={(e) => setCountryQuery(e.target.value)}
-                className="w-full bg-white/60 border border-[#827875]/20 rounded-lg pl-8 pr-8 py-1.5 text-xs text-[#3a3635] placeholder-[#827875] outline-none focus:border-[#3790C9]/40 transition-colors"
-              />
-              {countryQuery && (
-                <button
-                  onClick={() => setCountryQuery("")}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-[#827875] hover:text-[#3790C9] cursor-pointer"
-                >
-                  <X size={12} />
-                </button>
-              )}
-            </div>
             <div className="space-y-1 pr-1 max-h-40 overflow-y-auto scrollbar-thin">
               {filteredCountryOptions.map((name) => (
                 <label
