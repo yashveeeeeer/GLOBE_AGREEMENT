@@ -309,7 +309,7 @@ function GlobeViewInner({
   }, [onSelectCountry]);
 
   return (
-    <div ref={containerRef} className="w-full h-full relative">
+    <div ref={containerRef} className="w-full h-full relative" style={{ isolation: "isolate", transform: "translateZ(0)" }}>
       <Globe
         ref={globeRef}
         width={dimensions.width}
