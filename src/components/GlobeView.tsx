@@ -37,9 +37,12 @@ import {
   NIGHT_BG,
   NIGHT_ATMOSPHERE,
   NIGHT_ARC_HIGHLIGHT,
-  NIGHT_ARC_DIM,
-  NIGHT_POINT_COLOR,
-  NIGHT_POINT_COLOR_HIGHLIGHT,
+  DAY_POINT_SELECTED,
+  DAY_POINT_CONNECTED,
+  DAY_POINT_UNCONNECTED,
+  NIGHT_POINT_SELECTED,
+  NIGHT_POINT_CONNECTED,
+  NIGHT_POINT_UNCONNECTED,
 } from "@/lib/colors";
 import { isEdgeConnectedToCountry } from "@/lib/filtering";
 import { RotateCcw, Sun, Moon } from "lucide-react";
@@ -76,6 +79,16 @@ function GlobeViewInner({
   const [zoomedIn, setZoomedIn] = useState(false);
 
   const highlightIso3 = selectedCountryIso3;
+
+  const connectedIso3s = useMemo(() => {
+    if (!highlightIso3) return null;
+    const set = new Set<string>();
+    for (const e of edges) {
+      if (e.src_iso3 === highlightIso3) set.add(e.dst_iso3);
+      else if (e.dst_iso3 === highlightIso3) set.add(e.src_iso3);
+    }
+    return set;
+  }, [edges, highlightIso3]);
 
   const points: PointDatum[] = useMemo(
     () => buildPointsFromEdges(edges),
@@ -198,14 +211,14 @@ function GlobeViewInner({
   const pointColorFn = useCallback(
     (d: object) => {
       const p = d as PointDatum;
-      if (nightMode) {
-        if (highlightIso3 && p.iso3 === highlightIso3) return NIGHT_POINT_COLOR_HIGHLIGHT;
-        return NIGHT_POINT_COLOR;
-      }
-      if (highlightIso3 && p.iso3 === highlightIso3) return POINT_COLOR_HIGHLIGHT;
-      return POINT_COLOR;
+      if (!highlightIso3) return nightMode ? "#ffffff" : POINT_COLOR;
+      if (p.iso3 === highlightIso3)
+        return nightMode ? NIGHT_POINT_SELECTED : DAY_POINT_SELECTED;
+      if (connectedIso3s?.has(p.iso3))
+        return nightMode ? NIGHT_POINT_CONNECTED : DAY_POINT_CONNECTED;
+      return nightMode ? NIGHT_POINT_UNCONNECTED : DAY_POINT_UNCONNECTED;
     },
-    [highlightIso3, nightMode]
+    [highlightIso3, nightMode, connectedIso3s]
   );
 
   const handlePointClick = useCallback(
