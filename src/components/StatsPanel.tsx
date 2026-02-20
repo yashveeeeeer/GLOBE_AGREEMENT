@@ -1,7 +1,53 @@
-import { memo, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { BarChart3, ChevronLeft, ChevronRight } from "lucide-react";
 import type { Edge } from "@/lib/data";
 import { getTypeColor } from "@/lib/colors";
+
+function useAnimatedCount(target: number, durationMs = 1200): number {
+  const [display, setDisplay] = useState(0);
+  const raf = useRef<number>(0);
+
+  useEffect(() => {
+    const start = performance.now();
+    const from = 0;
+
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / durationMs, 1);
+      const eased = t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
+      setDisplay(Math.round(from + (target - from) * eased));
+      if (t < 1) raf.current = requestAnimationFrame(tick);
+    };
+
+    raf.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf.current);
+  }, [target, durationMs]);
+
+  return display;
+}
+
+function AnimatedCounts({ edgeCount, totalEdges, agreementCount }: { edgeCount: number; totalEdges: number; agreementCount: number }) {
+  const animEdges = useAnimatedCount(edgeCount);
+  const animAgreements = useAnimatedCount(agreementCount);
+
+  return (
+    <div className="grid grid-cols-2 gap-3">
+      <div>
+        <div className="text-lg font-bold text-[#3a3635]">
+          {animEdges.toLocaleString()}
+        </div>
+        <div className="text-[10px] text-[#827875]">
+          of {totalEdges.toLocaleString()} edges
+        </div>
+      </div>
+      <div>
+        <div className="text-lg font-bold text-[#3a3635]">
+          {animAgreements.toLocaleString()}
+        </div>
+        <div className="text-[10px] text-[#827875]">agreements</div>
+      </div>
+    </div>
+  );
+}
 
 interface StatsPanelProps {
   filteredEdges: Edge[];
@@ -78,22 +124,11 @@ function StatsPanelInner({ filteredEdges, totalEdges }: StatsPanelProps) {
 
       <div className="overflow-y-auto flex-1 px-4 py-3 space-y-4 scrollbar-thin">
         {/* Counts */}
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <div className="text-lg font-bold text-[#3a3635]">
-              {filteredEdges.length.toLocaleString()}
-            </div>
-            <div className="text-[10px] text-[#827875]">
-              of {totalEdges.toLocaleString()} edges
-            </div>
-          </div>
-          <div>
-            <div className="text-lg font-bold text-[#3a3635]">
-              {stats.uniqueAgreements.toLocaleString()}
-            </div>
-            <div className="text-[10px] text-[#827875]">agreements</div>
-          </div>
-        </div>
+        <AnimatedCounts
+          edgeCount={filteredEdges.length}
+          totalEdges={totalEdges}
+          agreementCount={stats.uniqueAgreements}
+        />
 
         {/* Top Types */}
         <section>
