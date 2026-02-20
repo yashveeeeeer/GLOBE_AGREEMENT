@@ -20,7 +20,7 @@ npm run setup
 npm run dev
 ```
 
-Open [http://localhost:5173]((https://yashveeeeeer.github.io/GLOBE_AGREEMENT/)) in your browser.
+**Live demo:** [https://yashveeeeeer.github.io/GLOBE_AGREEMENT/](https://yashveeeeeer.github.io/GLOBE_AGREEMENT/)
 
 ## npm Scripts
 
