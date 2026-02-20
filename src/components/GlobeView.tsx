@@ -217,15 +217,6 @@ function GlobeViewInner({
     }
   }, [edges, highlightIso3]);
 
-  // Animated deselect via trigger (Clear button / AgreementDetailPanel close)
-  const prevTriggerRef = useRef(deselectTrigger);
-  useEffect(() => {
-    if (deselectTrigger !== undefined && deselectTrigger !== prevTriggerRef.current) {
-      prevTriggerRef.current = deselectTrigger;
-      if (selectedCountryIso3) resetView();
-    }
-  }, [deselectTrigger, selectedCountryIso3, resetView]);
-
   // Clean up on external deselect (e.g. Clear All Filters)
   useEffect(() => {
     if (!selectedCountryIso3 && animPhaseRef.current !== "idle" && animPhaseRef.current !== "hiding" && animPhaseRef.current !== "resetting") {
@@ -518,6 +509,15 @@ function GlobeViewInner({
       }, 1000);
     });
   }, [selectedCountryIso3, onSelectCountry, edges, points, startHide]);
+
+  // Animated deselect via trigger (Clear button / AgreementDetailPanel close)
+  const prevTriggerRef = useRef(deselectTrigger);
+  useEffect(() => {
+    if (deselectTrigger !== undefined && deselectTrigger !== prevTriggerRef.current) {
+      prevTriggerRef.current = deselectTrigger;
+      if (selectedCountryIso3) resetView();
+    }
+  }, [deselectTrigger, selectedCountryIso3, resetView]);
 
   return (
     <div ref={containerRef} className="w-full h-full relative" style={{ isolation: "isolate", transform: "translateZ(0)" }}>
