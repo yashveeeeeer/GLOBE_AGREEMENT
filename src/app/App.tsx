@@ -267,13 +267,14 @@ export default function App() {
         }`}
         style={{ zIndex: 100 }}
       >
-        <span className={`font-semibold uppercase ${
-          nightMode ? "text-white" : "text-[#3790C9]"
-        } ${
-          isSmallScreen
-            ? "text-[10px] leading-tight tracking-[0.10em] opacity-70"
-            : "text-lg tracking-[0.15em] opacity-80"
-        }`}>
+        <span
+          className={`font-medium uppercase ${
+            isSmallScreen
+              ? "text-[10px] leading-tight tracking-[0.10em] opacity-70"
+              : "text-lg tracking-[0.15em] opacity-80"
+          }`}
+          style={{ color: nightMode ? "#ffffff" : "rgb(20, 18, 15)" }}
+        >
           International Investment Agreements Navigator
         </span>
       </div>
