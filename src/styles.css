@@ -98,23 +98,48 @@
   }
 }
 
-@keyframes globe-emerge {
+@-webkit-keyframes globe-emerge {
   0% {
     opacity: 0;
+    -webkit-transform: scale(0.3);
     transform: scale(0.3);
   }
   60% {
     opacity: 1;
+    -webkit-transform: scale(1.02);
     transform: scale(1.02);
   }
   100% {
     opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes globe-emerge {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0.3);
+    transform: scale(0.3);
+  }
+  60% {
+    opacity: 1;
+    -webkit-transform: scale(1.02);
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
     transform: scale(1);
   }
 }
 
 .globe-enter {
+  -webkit-animation: globe-emerge 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   animation: globe-emerge 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+  -webkit-transform-origin: center center;
+  transform-origin: center center;
 }
 
 @media (max-width: 640px) {
