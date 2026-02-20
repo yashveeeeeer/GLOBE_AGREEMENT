@@ -31,6 +31,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
+  const [animDone, setAnimDone] = useState(false);
   const [meta, setMeta] = useState<DataMeta | null>(null);
   const [filters, setFilters] = useState<FilterState | null>(null);
 
@@ -178,7 +179,11 @@ export default function App() {
   }
 
   return (
-    <div className={`w-full h-full relative overflow-hidden bg-[#FAF9F6]${revealed ? " globe-enter" : ""}`} style={revealed ? undefined : { opacity: 0 }}>
+    <div
+      className={`w-full h-full relative overflow-hidden bg-[#FAF9F6]${revealed && !animDone ? " globe-enter" : ""}`}
+      style={revealed ? undefined : { opacity: 0 }}
+      onAnimationEnd={() => setAnimDone(true)}
+    >
       <ErrorBoundary>
         <GlobeView
           edges={filteredEdges}
