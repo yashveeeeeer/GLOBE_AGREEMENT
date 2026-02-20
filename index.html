@@ -2,11 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/GLOBE_AGREEMENT/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>International Investment Agreements Navigator</title>
+    <link rel="preload" href="/GLOBE_AGREEMENT/textures/earth-day.jpg" as="image" />
+    <link rel="preload" href="/GLOBE_AGREEMENT/data/agreements_edges.json" as="fetch" crossorigin />
+    <link rel="preload" href="/GLOBE_AGREEMENT/data/countries_index.json" as="fetch" crossorigin />
+    <style>
+      #splash{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#FAF9F6;transition:opacity .5s ease}
+      #splash.hide{opacity:0;pointer-events:none}
+      #splash video{width:140px;height:auto}
+      #splash .splash-text{margin-top:20px;color:#3790C9;font-family:system-ui,-apple-system,sans-serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;opacity:.7}
+    </style>
   </head>
   <body>
+    <div id="splash">
+      <video autoplay loop muted playsinline>
+        <source src="/GLOBE_AGREEMENT/loading.mp4" type="video/mp4" />
+      </video>
+      <div class="splash-text">Loading Globe&hellip;</div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

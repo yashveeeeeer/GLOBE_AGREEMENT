@@ -51,6 +51,8 @@ const POINT_COLOR_HIGHLIGHT = "#41A0D8";
 
 const SPREAD_THRESHOLD = 1.5;
 
+const isMobile = typeof navigator !== "undefined" && /Mobi|Android/i.test(navigator.userAgent);
+
 function GlobeViewInner({
   edges,
   selectedCountryIso3,
@@ -58,6 +60,7 @@ function GlobeViewInner({
 }: GlobeViewProps) {
   const globeRef = useRef<GlobeHandle>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number | null>(null);
   const [hoveredCountryIso3, setHoveredCountryIso3] = useState<string | null>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
   const [zoomedIn, setZoomedIn] = useState(false);
@@ -107,15 +110,22 @@ function GlobeViewInner({
     globe.pointOfView({ lat: 20, lng: 0, altitude: 2.5 });
 
     const onControlChange = () => {
-      try {
-        const pov = globe.pointOfView();
-        const nowZoomed = pov.altitude < SPREAD_THRESHOLD;
-        setZoomedIn((prev) => (prev !== nowZoomed ? nowZoomed : prev));
-      } catch (_) {}
+      if (rafRef.current) return;
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
+        try {
+          const pov = globe.pointOfView();
+          const nowZoomed = pov.altitude < SPREAD_THRESHOLD;
+          setZoomedIn((prev) => (prev !== nowZoomed ? nowZoomed : prev));
+        } catch (_) {}
+      });
     };
 
     controls.addEventListener?.("change", onControlChange);
-    return () => { controls.removeEventListener?.("change", onControlChange); };
+    return () => {
+      controls.removeEventListener?.("change", onControlChange);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   // Pixel ratio cap
@@ -317,7 +327,7 @@ function GlobeViewInner({
         pointColor={pointColorFn}
         pointAltitude={0.005}
         pointRadius={0.35}
-        pointResolution={12}
+        pointResolution={isMobile ? 6 : 12}
         pointLabel={pointLabelFn}
         onPointHover={handlePointHover}
         onPointClick={handlePointClick}
@@ -336,7 +346,7 @@ function GlobeViewInner({
         arcAltitude={null}
         arcAltitudeAutoScale={0.4}
         arcLabel={arcLabelFn}
-        arcCurveResolution={16}
+        arcCurveResolution={isMobile ? 8 : 16}
         onArcHover={undefined}
       />
 

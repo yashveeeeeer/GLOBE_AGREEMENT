@@ -38,12 +38,19 @@ export function getTypeColor(typeCode: string): string {
   return TYPE_COLORS[typeCode] || DEFAULT_COLOR;
 }
 
+const rgbaCache = new Map<string, string>();
+
 export function getTypeColorRgba(typeCode: string, alpha: number): string {
+  const key = `${typeCode}-${alpha}`;
+  let cached = rgbaCache.get(key);
+  if (cached) return cached;
   const hex = getTypeColor(typeCode);
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
   const b = parseInt(hex.slice(5, 7), 16);
-  return `rgba(${r},${g},${b},${alpha})`;
+  cached = `rgba(${r},${g},${b},${alpha})`;
+  rgbaCache.set(key, cached);
+  return cached;
 }
 
 export const POINT_COLOR_DEFAULT = "#3790C9";

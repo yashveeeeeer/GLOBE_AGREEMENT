@@ -10,6 +10,13 @@ import AgreementDetailPanel from "@/components/AgreementDetailPanel";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { Globe, Loader } from "lucide-react";
 
+function dismissSplash() {
+  const el = document.getElementById("splash");
+  if (!el) return;
+  el.classList.add("hide");
+  setTimeout(() => el.remove(), 600);
+}
+
 export default function App() {
   const [allEdges, setAllEdges] = useState<Edge[]>([]);
   const [countries, setCountries] = useState<CountryIndex[]>([]);
@@ -49,10 +56,12 @@ export default function App() {
             : defaultFilters(m)
         );
         setLoading(false);
+        dismissSplash();
       } catch (err) {
         if (!cancelled) {
           setError(err instanceof Error ? err.message : "Unknown error");
           setLoading(false);
+          dismissSplash();
         }
       }
     }
@@ -96,6 +105,21 @@ export default function App() {
     }
     return ids.size;
   }, [filters?.selectedCountryIso3, filteredEdges]);
+
+  const countryLookup = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const c of countries) map.set(c.iso3, c.name);
+    return map;
+  }, [countries]);
+
+  const selectedCountryName = useMemo(
+    () => {
+      const iso3 = filters?.selectedCountryIso3;
+      if (!iso3) return "";
+      return countryLookup.get(iso3) ?? iso3;
+    },
+    [countryLookup, filters?.selectedCountryIso3]
+  );
 
   const handleFilterChange = useCallback(
     (patch: Partial<FilterState>) => {
@@ -174,10 +198,7 @@ export default function App() {
           edges={filteredEdges}
           selectedCountryIso3={filters.selectedCountryIso3}
           panelBottomClass="bottom-24"
-          countryName={
-            countries.find((c) => c.iso3 === filters.selectedCountryIso3)
-              ?.name || filters.selectedCountryIso3
-          }
+          countryName={selectedCountryName}
           onClose={() => handleSelectCountry(null)}
         />
       )}
@@ -187,9 +208,7 @@ export default function App() {
           <span className="text-sm text-[#3a3635] whitespace-nowrap">
             Selected:{" "}
             <span className="font-semibold text-[#3790C9]">
-              {countries.find(
-                (c) => c.iso3 === filters.selectedCountryIso3
-              )?.name || filters.selectedCountryIso3}
+              {selectedCountryName}
             </span>
             <span className="text-[#827875]"> • {selectedAgreementCount} agreements</span>
           </span>

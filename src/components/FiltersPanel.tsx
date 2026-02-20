@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import {
   Filter,
   ChevronLeft,
@@ -85,8 +85,11 @@ function FiltersPanelInner({
   const selectedTypes = Array.from(filters.selectedTypes);
   const selectedContinents = Array.from(filters.selectedContinents);
   const selectedCountries = Array.from(filters.selectedCountries);
-  const filteredCountryOptions = countryOptions.filter((name) =>
-    name.toLowerCase().includes(countryQuery.trim().toLowerCase())
+  const filteredCountryOptions = useMemo(
+    () => countryOptions.filter((name) =>
+      name.toLowerCase().includes(countryQuery.trim().toLowerCase())
+    ),
+    [countryOptions, countryQuery]
   );
 
   return (
