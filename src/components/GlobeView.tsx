@@ -153,10 +153,12 @@ function GlobeViewInner({
     return () => clearTimeout(timer);
   }, []);
 
-  // Pause auto-rotation while the cursor is over the globe
+  // Pause auto-rotation only when the cursor is over the WebGL canvas itself
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
+    const canvas = el.querySelector("canvas");
+    if (!canvas) return;
 
     let resumeTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -179,15 +181,15 @@ function GlobeViewInner({
       }, 300);
     };
 
-    el.addEventListener("mouseenter", onEnter);
-    el.addEventListener("mouseleave", onLeave);
-    el.addEventListener("touchstart", onEnter, { passive: true });
-    el.addEventListener("touchend", onLeave, { passive: true });
+    canvas.addEventListener("mouseenter", onEnter);
+    canvas.addEventListener("mouseleave", onLeave);
+    canvas.addEventListener("touchstart", onEnter, { passive: true });
+    canvas.addEventListener("touchend", onLeave, { passive: true });
     return () => {
-      el.removeEventListener("mouseenter", onEnter);
-      el.removeEventListener("mouseleave", onLeave);
-      el.removeEventListener("touchstart", onEnter);
-      el.removeEventListener("touchend", onLeave);
+      canvas.removeEventListener("mouseenter", onEnter);
+      canvas.removeEventListener("mouseleave", onLeave);
+      canvas.removeEventListener("touchstart", onEnter);
+      canvas.removeEventListener("touchend", onLeave);
       if (resumeTimer) clearTimeout(resumeTimer);
     };
   }, []);
