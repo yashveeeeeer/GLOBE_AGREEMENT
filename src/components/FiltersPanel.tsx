@@ -123,7 +123,7 @@ function FiltersPanelInner({
       )}
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-[#827875]/15">
-        <div className="flex items-center gap-2 text-base font-semibold italic text-[#3790C9]">
+        <div className="flex items-center gap-2 text-sm font-semibold text-[#3790C9]">
           <Filter size={16} />
           Filters
         </div>
@@ -148,7 +148,7 @@ function FiltersPanelInner({
       <div className="overflow-y-auto flex-1 px-4 py-3 space-y-5 scrollbar-thin">
         {/* Agreement Types */}
         <section>
-          <h3 className="text-[13px] font-semibold text-[#827875] uppercase tracking-wider mb-2">
+          <h3 className="text-xs font-semibold text-[#827875] uppercase tracking-wider mb-2">
             Agreement Type
           </h3>
           <button
@@ -211,7 +211,7 @@ function FiltersPanelInner({
 
         {/* Status */}
         <section>
-          <h3 className="text-[13px] font-semibold text-[#827875] uppercase tracking-wider mb-2">
+          <h3 className="text-xs font-semibold text-[#827875] uppercase tracking-wider mb-2">
             Status
           </h3>
           <div className="space-y-1">
@@ -234,7 +234,7 @@ function FiltersPanelInner({
 
         {/* ORG Agreements */}
         <section>
-          <h3 className="text-[13px] font-semibold text-[#827875] uppercase tracking-wider mb-2">
+          <h3 className="text-xs font-semibold text-[#827875] uppercase tracking-wider mb-2">
             Organization Agreements
           </h3>
           <label className="flex items-center gap-2 text-xs cursor-pointer text-[#3a3635] hover:text-[#3790C9] transition-colors">
@@ -255,7 +255,7 @@ function FiltersPanelInner({
 
         {/* Continents */}
         <section>
-          <h3 className="text-[13px] font-semibold text-[#827875] uppercase tracking-wider mb-2">
+          <h3 className="text-xs font-semibold text-[#827875] uppercase tracking-wider mb-2">
             Continents
           </h3>
           <button
@@ -328,7 +328,7 @@ function FiltersPanelInner({
 
         {/* Intercontinental */}
         <section>
-          <h3 className="text-[13px] font-semibold text-[#827875] uppercase tracking-wider mb-2">
+          <h3 className="text-xs font-semibold text-[#827875] uppercase tracking-wider mb-2">
             Intercontinental
           </h3>
           <div className="flex gap-1">
@@ -350,7 +350,7 @@ function FiltersPanelInner({
 
         {/* Year Range */}
         <section>
-          <h3 className="text-[13px] font-semibold text-[#827875] uppercase tracking-wider mb-2">
+          <h3 className="text-xs font-semibold text-[#827875] uppercase tracking-wider mb-2">
             Signature Year
           </h3>
           <div className="space-y-3">
@@ -432,7 +432,7 @@ function FiltersPanelInner({
 
         {/* Country Selection */}
         <section>
-          <h3 className="text-[13px] font-semibold text-[#827875] uppercase tracking-wider mb-2">
+          <h3 className="text-xs font-semibold text-[#827875] uppercase tracking-wider mb-2">
             Country
           </h3>
           <div className="relative">

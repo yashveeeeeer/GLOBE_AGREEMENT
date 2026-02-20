@@ -54,6 +54,7 @@ interface GlobeViewProps {
   onSelectCountry: (iso3: string | null) => void;
   nightMode: boolean;
   onToggleNightMode: () => void;
+  deselectTrigger?: number;
 }
 
 const ARC_HIGHLIGHT = "rgba(55, 144, 201, 0.60)";
@@ -92,6 +93,7 @@ function GlobeViewInner({
   onSelectCountry,
   nightMode,
   onToggleNightMode,
+  deselectTrigger,
 }: GlobeViewProps) {
   const globeRef = useRef<GlobeHandle>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -215,9 +217,18 @@ function GlobeViewInner({
     }
   }, [edges, highlightIso3]);
 
-  // Clean up on external deselect (e.g. Clear button)
+  // Animated deselect via trigger (Clear button / AgreementDetailPanel close)
+  const prevTriggerRef = useRef(deselectTrigger);
   useEffect(() => {
-    if (!selectedCountryIso3 && animPhaseRef.current !== "idle") {
+    if (deselectTrigger !== undefined && deselectTrigger !== prevTriggerRef.current) {
+      prevTriggerRef.current = deselectTrigger;
+      if (selectedCountryIso3) resetView();
+    }
+  }, [deselectTrigger, selectedCountryIso3, resetView]);
+
+  // Clean up on external deselect (e.g. Clear All Filters)
+  useEffect(() => {
+    if (!selectedCountryIso3 && animPhaseRef.current !== "idle" && animPhaseRef.current !== "hiding" && animPhaseRef.current !== "resetting") {
       cancelAnim();
     }
   }, [selectedCountryIso3, cancelAnim]);

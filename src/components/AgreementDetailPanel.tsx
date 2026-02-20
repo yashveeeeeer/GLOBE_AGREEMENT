@@ -84,7 +84,7 @@ function AgreementDetailPanelInner({
         </div>
       )}
       <div className="flex items-center justify-between px-4 py-2.5 border-b border-[#827875]/15">
-        <div className="flex items-center gap-2 text-sm font-semibold italic text-[#3790C9] min-w-0">
+        <div className="flex items-center gap-2 text-xs font-semibold text-[#3790C9] min-w-0">
           <FileText size={14} className="flex-shrink-0" />
           <span className="truncate">{countryName}</span>
           <span className="text-[#827875] font-normal flex-shrink-0">

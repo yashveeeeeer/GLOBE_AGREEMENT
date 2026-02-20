@@ -36,6 +36,8 @@ export default function App() {
   const [nightMode, setNightMode] = useState(false);
   const [meta, setMeta] = useState<DataMeta | null>(null);
   const [filters, setFilters] = useState<FilterState | null>(null);
+  const [deselectTrigger, setDeselectTrigger] = useState(0);
+  const [deselectPending, setDeselectPending] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -150,6 +152,15 @@ export default function App() {
     );
   }, []);
 
+  const requestDeselect = useCallback(() => {
+    setDeselectTrigger((t) => t + 1);
+    setDeselectPending(true);
+  }, []);
+
+  useEffect(() => {
+    if (!filters?.selectedCountryIso3) setDeselectPending(false);
+  }, [filters?.selectedCountryIso3]);
+
   const handleToggleNightMode = useCallback(() => {
     setNightMode((prev) => !prev);
   }, []);
@@ -158,7 +169,7 @@ export default function App() {
     return (
       <div className="w-full h-full flex flex-col items-center justify-center bg-[#FAF9F6]">
         <Globe size={48} className="text-[#3790C9] mb-4 animate-pulse" />
-        <div className="text-[#3790C9] text-lg font-semibold mb-2" style={{ fontFamily: '"Baskervville", Georgia, serif' }}>
+        <div className="text-[#3790C9] text-lg font-semibold mb-2">
           International Investment Agreements Navigator
         </div>
         <div className="flex items-center gap-2 text-[#827875] text-sm">
@@ -201,6 +212,7 @@ export default function App() {
           onSelectCountry={handleSelectCountry}
           nightMode={nightMode}
           onToggleNightMode={handleToggleNightMode}
+          deselectTrigger={deselectTrigger}
         />
       </ErrorBoundary>
 
@@ -220,17 +232,17 @@ export default function App() {
         revealed={revealed}
       />
 
-      {filters?.selectedCountryIso3 && (
+      {filters?.selectedCountryIso3 && !deselectPending && (
         <AgreementDetailPanel
           edges={filteredEdges}
           selectedCountryIso3={filters.selectedCountryIso3}
           panelBottomClass="bottom-24"
           countryName={selectedCountryName}
-          onClose={() => handleSelectCountry(null)}
+          onClose={requestDeselect}
         />
       )}
 
-      {filters?.selectedCountryIso3 && (
+      {filters?.selectedCountryIso3 && !deselectPending && (
         <div
           className={`absolute glass-panel flex items-center gap-3 ${
             isSmallScreen
@@ -251,7 +263,7 @@ export default function App() {
             </span>
           )}
           <button
-            onClick={() => handleSelectCountry(null)}
+            onClick={requestDeselect}
             className="text-[#827875] hover:text-[#3790C9] text-xs cursor-pointer ml-auto flex-shrink-0"
           >
             Clear
