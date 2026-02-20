@@ -36,7 +36,7 @@ function AnimatedCounts({ edgeCount, totalEdges, agreementCount, revealed }: { e
         <div className="text-lg font-bold text-[#3a3635]">
           {animEdges.toLocaleString()}
         </div>
-        <div className="text-[10px] text-[#827875]">
+        <div className="text-[10px] text-[#827875] italic">
           of {totalEdges.toLocaleString()} edges
         </div>
       </div>
@@ -44,7 +44,7 @@ function AnimatedCounts({ edgeCount, totalEdges, agreementCount, revealed }: { e
         <div className="text-lg font-bold text-[#3a3635]">
           {animAgreements.toLocaleString()}
         </div>
-        <div className="text-[10px] text-[#827875]">agreements</div>
+        <div className="text-[10px] text-[#827875] italic">agreements</div>
       </div>
     </div>
   );
@@ -136,7 +136,7 @@ function StatsPanelInner({ filteredEdges, totalEdges, revealed }: StatsPanelProp
       )}
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-[#827875]/15">
-        <div className="flex items-center gap-2 text-sm font-semibold text-[#3790C9]">
+        <div className="flex items-center gap-2 text-base font-semibold italic text-[#3790C9]">
           <BarChart3 size={16} />
           Stats
         </div>
@@ -159,7 +159,7 @@ function StatsPanelInner({ filteredEdges, totalEdges, revealed }: StatsPanelProp
 
         {/* Top Types */}
         <section>
-          <h3 className="text-[10px] font-semibold text-[#827875] uppercase tracking-wider mb-2">
+          <h3 className="text-[11px] font-semibold text-[#827875] uppercase tracking-wider mb-2">
             Top Types
           </h3>
           <div className="space-y-1.5">
@@ -189,7 +189,7 @@ function StatsPanelInner({ filteredEdges, totalEdges, revealed }: StatsPanelProp
 
         {/* Top Countries */}
         <section>
-          <h3 className="text-[10px] font-semibold text-[#827875] uppercase tracking-wider mb-2">
+          <h3 className="text-[11px] font-semibold text-[#827875] uppercase tracking-wider mb-2">
             Top Countries
           </h3>
           <div className="space-y-1">

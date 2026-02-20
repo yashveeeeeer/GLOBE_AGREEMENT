@@ -158,7 +158,7 @@ export default function App() {
     return (
       <div className="w-full h-full flex flex-col items-center justify-center bg-[#FAF9F6]">
         <Globe size={48} className="text-[#3790C9] mb-4 animate-pulse" />
-        <div className="text-[#3790C9] text-lg font-semibold mb-2">
+        <div className="text-[#3790C9] text-lg font-semibold mb-2" style={{ fontFamily: '"Baskervville", Georgia, serif' }}>
           International Investment Agreements Navigator
         </div>
         <div className="flex items-center gap-2 text-[#827875] text-sm">
@@ -267,8 +267,12 @@ export default function App() {
         }`}
         style={{ zIndex: 100 }}
       >
-        <span className={`text-[#3790C9] font-semibold tracking-[0.12em] uppercase ${
-          isSmallScreen ? "text-[9px] leading-tight opacity-70" : "text-xs opacity-60"
+        <span className={`font-semibold uppercase ${
+          nightMode ? "text-white" : "text-[#3790C9]"
+        } ${
+          isSmallScreen
+            ? "text-[10px] leading-tight tracking-[0.10em] opacity-70"
+            : "text-lg tracking-[0.15em] opacity-80"
         }`}>
           International Investment Agreements Navigator
         </span>

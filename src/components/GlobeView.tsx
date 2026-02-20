@@ -257,7 +257,7 @@ function GlobeViewInner({
       controls.minDistance = isMobile ? 150 : 120;
       controls.maxDistance = 600;
     }
-    globe.pointOfView({ lat: 20, lng: 0, altitude: isSmallScreen ? 3.2 : 2.5 });
+    globe.pointOfView({ lat: 20, lng: 0, altitude: isSmallScreen ? 3.5 : 2.5 });
 
     const onControlChange = () => {
       if (rafRef.current) return;
@@ -367,7 +367,7 @@ function GlobeViewInner({
             animPhaseRef.current = "resetting";
             setArcTick(t => t + 1);
             const globe = globeRef.current;
-            if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: isSmallScreen ? 3.2 : 2.5 }, 1000);
+            if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: isSmallScreen ? 3.5 : 2.5 }, 1000);
             animTimerRef.current = setTimeout(() => {
               animPhaseRef.current = "idle";
               animTimerRef.current = null;
@@ -466,7 +466,7 @@ function GlobeViewInner({
       animPhaseRef.current = "idle";
       revealedIdsRef.current = new Set();
       const globe = globeRef.current;
-      if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: isSmallScreen ? 3.2 : 2.5 }, 1000);
+      if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: isSmallScreen ? 3.5 : 2.5 }, 1000);
       return;
     }
 
@@ -478,7 +478,7 @@ function GlobeViewInner({
       onSelectCountry(null);
       setArcTick(t => t + 1);
       const globe = globeRef.current;
-      if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: isSmallScreen ? 3.2 : 2.5 }, 1000);
+      if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: isSmallScreen ? 3.5 : 2.5 }, 1000);
       return;
     }
 
@@ -500,7 +500,7 @@ function GlobeViewInner({
       animPhaseRef.current = "resetting";
       setArcTick(t => t + 1);
       const globe = globeRef.current;
-      if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: isSmallScreen ? 3.2 : 2.5 }, 1000);
+      if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: isSmallScreen ? 3.5 : 2.5 }, 1000);
       animTimerRef.current = setTimeout(() => {
         animPhaseRef.current = "idle";
         animTimerRef.current = null;
