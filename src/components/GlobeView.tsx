@@ -72,11 +72,10 @@ function GlobeViewInner({
   const globeRef = useRef<GlobeHandle>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number | null>(null);
-  const [hoveredCountryIso3, setHoveredCountryIso3] = useState<string | null>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
   const [zoomedIn, setZoomedIn] = useState(false);
 
-  const highlightIso3 = selectedCountryIso3 || hoveredCountryIso3;
+  const highlightIso3 = selectedCountryIso3;
 
   const points: PointDatum[] = useMemo(
     () => buildPointsFromEdges(edges),
@@ -209,13 +208,6 @@ function GlobeViewInner({
     [highlightIso3, nightMode]
   );
 
-  const handlePointHover = useCallback(
-    (point: object | null) => {
-      setHoveredCountryIso3(point ? (point as PointDatum).iso3 : null);
-    },
-    []
-  );
-
   const handlePointClick = useCallback(
     (point: object) => {
       const p = point as PointDatum;
@@ -281,32 +273,9 @@ function GlobeViewInner({
     [highlightIso3]
   );
 
-  const arcDashLengthFn = useCallback(
-    (d: object) => {
-      if (highlightIso3 && isEdgeConnectedToCountry(d as Edge, highlightIso3))
-        return 0.4;
-      return 1;
-    },
-    [highlightIso3]
-  );
-
-  const arcDashGapFn = useCallback(
-    (d: object) => {
-      if (highlightIso3 && isEdgeConnectedToCountry(d as Edge, highlightIso3))
-        return 0.2;
-      return 0;
-    },
-    [highlightIso3]
-  );
-
-  const arcDashAnimFn = useCallback(
-    (d: object) => {
-      if (highlightIso3 && isEdgeConnectedToCountry(d as Edge, highlightIso3))
-        return 2500;
-      return 0;
-    },
-    [highlightIso3]
-  );
+  const arcDashLengthFn = useCallback(() => 1, []);
+  const arcDashGapFn = useCallback(() => 0, []);
+  const arcDashAnimFn = useCallback(() => 0, []);
 
   const arcLabelFn = useCallback((d: object) => {
     if (!selectedCountryIso3) return "";
@@ -324,7 +293,6 @@ function GlobeViewInner({
 
   const resetView = useCallback(() => {
     onSelectCountry(null);
-    setHoveredCountryIso3(null);
     const globe = globeRef.current;
     if (globe) {
       globe.pointOfView({ lat: 20, lng: 0, altitude: 2.5 }, 1000);
@@ -353,7 +321,6 @@ function GlobeViewInner({
         pointRadius={0.35}
         pointResolution={isMobile ? 6 : 12}
         pointLabel={pointLabelFn}
-        onPointHover={handlePointHover}
         onPointClick={handlePointClick}
         pointsTransitionDuration={800}
         // Arcs
