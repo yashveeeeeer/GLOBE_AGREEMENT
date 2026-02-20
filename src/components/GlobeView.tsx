@@ -63,6 +63,32 @@ const POINT_COLOR = "#3790C9";
 const POINT_COLOR_HIGHLIGHT = "#41A0D8";
 
 const SPREAD_THRESHOLD = 1.5;
+const ANIM_REVEAL_MS = 1500;
+const ANIM_MAX_STEPS = 30;
+
+function geoBearing(lat1: number, lng1: number, lat2: number, lng2: number): number {
+  const R = Math.PI / 180;
+  const dL = (lng2 - lng1) * R;
+  const y = Math.sin(dL) * Math.cos(lat2 * R);
+  const x = Math.cos(lat1 * R) * Math.sin(lat2 * R)
+          - Math.sin(lat1 * R) * Math.cos(lat2 * R) * Math.cos(dL);
+  return (Math.atan2(y, x) / R + 360) % 360;
+}
+
+function sortEdgesByBearing(iso3: string, lat: number, lng: number, allEdges: Edge[]): Edge[] {
+  const connected = allEdges.filter(
+    e => e.src_iso3 === iso3 || e.dst_iso3 === iso3
+  );
+  return connected.sort((a, b) => {
+    const aB = a.src_iso3 === iso3
+      ? geoBearing(lat, lng, a.dst_lat, a.dst_lng)
+      : geoBearing(lat, lng, a.src_lat, a.src_lng);
+    const bB = b.src_iso3 === iso3
+      ? geoBearing(lat, lng, b.dst_lat, b.dst_lng)
+      : geoBearing(lat, lng, b.src_lat, b.src_lng);
+    return aB - bB;
+  });
+}
 
 function GlobeViewInner({
   edges,
@@ -76,6 +102,12 @@ function GlobeViewInner({
   const rafRef = useRef<number | null>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
   const [zoomedIn, setZoomedIn] = useState(false);
+  const [arcTick, setArcTick] = useState(0);
+
+  const animPhaseRef = useRef<"idle" | "centering" | "revealing" | "selected" | "hiding" | "resetting">("idle");
+  const sortedArcsRef = useRef<Edge[]>([]);
+  const revealedIdsRef = useRef(new Set<string>());
+  const animTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const highlightIso3 = selectedCountryIso3;
 
@@ -98,6 +130,92 @@ function GlobeViewInner({
     () => spreadOverlappingPoints(points, zoomedIn),
     [points, zoomedIn]
   );
+
+  // ── Animation helpers ──────────────────────────────────────────────
+
+  const cancelAnim = useCallback(() => {
+    if (animTimerRef.current) {
+      clearTimeout(animTimerRef.current);
+      animTimerRef.current = null;
+    }
+    animPhaseRef.current = "idle";
+    revealedIdsRef.current = new Set();
+    sortedArcsRef.current = [];
+  }, []);
+
+  const startReveal = useCallback(() => {
+    const arcs = sortedArcsRef.current;
+    const total = arcs.length;
+    if (total === 0) { animPhaseRef.current = "selected"; return; }
+    const batchSize = Math.max(1, Math.ceil(total / ANIM_MAX_STEPS));
+    const stepMs = ANIM_REVEAL_MS / Math.ceil(total / batchSize);
+    let idx = 0;
+    animPhaseRef.current = "revealing";
+
+    function step() {
+      const end = Math.min(idx + batchSize, total);
+      const next = new Set(revealedIdsRef.current);
+      for (let i = idx; i < end; i++) next.add(arcs[i].edge_id);
+      revealedIdsRef.current = next;
+      idx = end;
+      setArcTick(t => t + 1);
+      if (idx < total) {
+        animTimerRef.current = setTimeout(step, stepMs);
+      } else {
+        animPhaseRef.current = "selected";
+        animTimerRef.current = null;
+      }
+    }
+    step();
+  }, []);
+
+  const startHide = useCallback((onDone: () => void) => {
+    const arcs = sortedArcsRef.current;
+    const total = arcs.length;
+    if (total === 0) { onDone(); return; }
+    const batchSize = Math.max(1, Math.ceil(total / ANIM_MAX_STEPS));
+    const stepMs = ANIM_REVEAL_MS / Math.ceil(total / batchSize);
+    let remaining = total;
+    animPhaseRef.current = "hiding";
+
+    function step() {
+      const start = Math.max(0, remaining - batchSize);
+      const next = new Set(revealedIdsRef.current);
+      for (let i = remaining - 1; i >= start; i--) next.delete(arcs[i].edge_id);
+      revealedIdsRef.current = next;
+      remaining = start;
+      setArcTick(t => t + 1);
+      if (remaining > 0) {
+        animTimerRef.current = setTimeout(step, stepMs);
+      } else {
+        animTimerRef.current = null;
+        onDone();
+      }
+    }
+    step();
+  }, []);
+
+  // Sync revealed set when edges change during "selected" state (e.g. filter change)
+  useEffect(() => {
+    if (animPhaseRef.current === "selected" && highlightIso3) {
+      const connected = edges.filter(e => isEdgeConnectedToCountry(e, highlightIso3));
+      revealedIdsRef.current = new Set(connected.map(e => e.edge_id));
+      sortedArcsRef.current = connected;
+      setArcTick(t => t + 1);
+    }
+  }, [edges, highlightIso3]);
+
+  // Clean up on external deselect (e.g. Clear button)
+  useEffect(() => {
+    if (!selectedCountryIso3 && animPhaseRef.current !== "idle") {
+      cancelAnim();
+    }
+  }, [selectedCountryIso3, cancelAnim]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => { if (animTimerRef.current) clearTimeout(animTimerRef.current); };
+  }, []);
 
   // Resize observer
   useEffect(() => {
@@ -223,17 +341,44 @@ function GlobeViewInner({
   const handlePointClick = useCallback(
     (point: object) => {
       const p = point as PointDatum;
+      cancelAnim();
+
       if (selectedCountryIso3 === p.iso3) {
-        onSelectCountry(null);
+        // Deselect: hide arcs counter-clockwise, then deselect + reset camera
+        const sorted = sortEdgesByBearing(p.iso3, p.lat, p.lng, edges);
+        sortedArcsRef.current = sorted;
+        revealedIdsRef.current = new Set(sorted.map(e => e.edge_id));
+        setArcTick(t => t + 1);
+
+        startHide(() => {
+          onSelectCountry(null);
+          animPhaseRef.current = "resetting";
+          setArcTick(t => t + 1);
+          const globe = globeRef.current;
+          if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: 2.5 }, 1000);
+          animTimerRef.current = setTimeout(() => {
+            animPhaseRef.current = "idle";
+            animTimerRef.current = null;
+          }, 1000);
+        });
       } else {
+        // Select: update immediately (points glow), center camera, then reveal arcs
         onSelectCountry(p.iso3);
+        const sorted = sortEdgesByBearing(p.iso3, p.lat, p.lng, edges);
+        sortedArcsRef.current = sorted;
+        revealedIdsRef.current = new Set();
+        setArcTick(t => t + 1);
+
+        animPhaseRef.current = "centering";
         const globe = globeRef.current;
-        if (globe) {
-          globe.pointOfView({ lat: p.lat, lng: p.lng, altitude: 2 }, 1000);
-        }
+        if (globe) globe.pointOfView({ lat: p.lat, lng: p.lng, altitude: 2 }, 1000);
+
+        animTimerRef.current = setTimeout(() => {
+          startReveal();
+        }, 1000);
       }
     },
-    [selectedCountryIso3, onSelectCountry]
+    [selectedCountryIso3, onSelectCountry, edges, cancelAnim, startReveal, startHide]
   );
 
   const pointLabelFn = useCallback((d: object) => {
@@ -260,6 +405,7 @@ function GlobeViewInner({
 
   const arcColorFn = useCallback(
     (d: object) => {
+      void arcTick;
       const e = d as Edge;
       if (!highlightIso3) {
         const c = nightMode
@@ -267,22 +413,25 @@ function GlobeViewInner({
           : getTypeColorRgba(e.agreement_type_code, 0.12);
         return [c, c];
       }
-      if (isEdgeConnectedToCountry(e, highlightIso3)) {
+      if (isEdgeConnectedToCountry(e, highlightIso3) && revealedIdsRef.current.has(e.edge_id)) {
         const hl = nightMode ? NIGHT_ARC_HIGHLIGHT : ARC_HIGHLIGHT;
         return [hl, hl];
       }
       return [ARC_TRANSPARENT, ARC_TRANSPARENT];
     },
-    [highlightIso3, nightMode]
+    [highlightIso3, nightMode, arcTick]
   );
 
   const arcStrokeFn = useCallback(
     (d: object) => {
+      void arcTick;
       if (!highlightIso3) return 0.08;
-      if (isEdgeConnectedToCountry(d as Edge, highlightIso3)) return 0.35;
+      const e = d as Edge;
+      if (isEdgeConnectedToCountry(e, highlightIso3) && revealedIdsRef.current.has(e.edge_id))
+        return 0.35;
       return 0;
     },
-    [highlightIso3]
+    [highlightIso3, arcTick]
   );
 
   const arcDashLengthFn = useCallback(() => 1, []);
@@ -304,12 +453,56 @@ function GlobeViewInner({
   // ── Reset ────────────────────────────────────────────────────────────
 
   const resetView = useCallback(() => {
-    onSelectCountry(null);
-    const globe = globeRef.current;
-    if (globe) {
-      globe.pointOfView({ lat: 20, lng: 0, altitude: 2.5 }, 1000);
+    if (animTimerRef.current) {
+      clearTimeout(animTimerRef.current);
+      animTimerRef.current = null;
     }
-  }, [onSelectCountry]);
+
+    if (!selectedCountryIso3) {
+      animPhaseRef.current = "idle";
+      revealedIdsRef.current = new Set();
+      const globe = globeRef.current;
+      if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: 2.5 }, 1000);
+      return;
+    }
+
+    // If mid-centering or mid-reveal, cancel instantly
+    if (animPhaseRef.current === "centering" || animPhaseRef.current === "revealing") {
+      animPhaseRef.current = "idle";
+      revealedIdsRef.current = new Set();
+      sortedArcsRef.current = [];
+      onSelectCountry(null);
+      setArcTick(t => t + 1);
+      const globe = globeRef.current;
+      if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: 2.5 }, 1000);
+      return;
+    }
+
+    // In "selected" state: animate hide, then reset camera
+    const pt = points.find(p => p.iso3 === selectedCountryIso3);
+    if (!pt) {
+      onSelectCountry(null);
+      animPhaseRef.current = "idle";
+      return;
+    }
+
+    const sorted = sortEdgesByBearing(pt.iso3, pt.lat, pt.lng, edges);
+    sortedArcsRef.current = sorted;
+    revealedIdsRef.current = new Set(sorted.map(e => e.edge_id));
+    setArcTick(t => t + 1);
+
+    startHide(() => {
+      onSelectCountry(null);
+      animPhaseRef.current = "resetting";
+      setArcTick(t => t + 1);
+      const globe = globeRef.current;
+      if (globe) globe.pointOfView({ lat: 20, lng: 0, altitude: 2.5 }, 1000);
+      animTimerRef.current = setTimeout(() => {
+        animPhaseRef.current = "idle";
+        animTimerRef.current = null;
+      }, 1000);
+    });
+  }, [selectedCountryIso3, onSelectCountry, edges, points, startHide]);
 
   return (
     <div ref={containerRef} className="w-full h-full relative" style={{ isolation: "isolate", transform: "translateZ(0)" }}>
