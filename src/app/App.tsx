@@ -8,6 +8,7 @@ import FiltersPanel from "@/components/FiltersPanel";
 import StatsPanel from "@/components/StatsPanel";
 import AgreementDetailPanel from "@/components/AgreementDetailPanel";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import { isSmallScreen } from "@/lib/mobile";
 import { Globe, Loader } from "lucide-react";
 
 const splashStart = performance.now();
@@ -230,31 +231,38 @@ export default function App() {
       )}
 
       {filters?.selectedCountryIso3 && (
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 glass-panel px-5 py-2 flex items-center gap-3">
-          <span className="text-sm text-[#3a3635] whitespace-nowrap">
-            Selected:{" "}
+        <div className={`absolute z-30 glass-panel flex items-center gap-3 ${
+          isSmallScreen
+            ? "top-3 left-3 right-3 px-3 py-2"
+            : "bottom-4 left-1/2 -translate-x-1/2 px-5 py-2"
+        }`}>
+          <span className={`text-[#3a3635] ${isSmallScreen ? "text-xs truncate" : "text-sm whitespace-nowrap"}`}>
             <span className="font-semibold text-[#3790C9]">
               {selectedCountryName}
             </span>
-            <span className="text-[#827875]"> • {selectedAgreementCount} agreements</span>
+            <span className="text-[#827875]"> • {selectedAgreementCount}</span>
           </span>
-          <span className="hidden md:inline text-xs text-[#827875]">
-            See right panel for agreement names
-          </span>
+          {!isSmallScreen && (
+            <span className="hidden md:inline text-xs text-[#827875]">
+              See right panel for agreement names
+            </span>
+          )}
           <button
             onClick={() => handleSelectCountry(null)}
-            className="text-[#827875] hover:text-[#3790C9] text-xs cursor-pointer"
+            className="text-[#827875] hover:text-[#3790C9] text-xs cursor-pointer ml-auto flex-shrink-0"
           >
             Clear
           </button>
         </div>
       )}
 
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 pointer-events-none select-none">
-        <span className="text-[#3790C9]/60 text-xs font-semibold tracking-[0.12em] uppercase">
-          International Investment Agreements Navigator
-        </span>
-      </div>
+      {!isSmallScreen && (
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 pointer-events-none select-none">
+          <span className="text-[#3790C9]/60 text-xs font-semibold tracking-[0.12em] uppercase">
+            International Investment Agreements Navigator
+          </span>
+        </div>
+      )}
 
       {filteredEdges.length === 0 && !loading && (
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 glass-panel px-8 py-6 text-center">

@@ -45,6 +45,7 @@ import {
   NIGHT_POINT_UNCONNECTED,
 } from "@/lib/colors";
 import { isEdgeConnectedToCountry } from "@/lib/filtering";
+import { isMobile } from "@/lib/mobile";
 import { RotateCcw, Sun, Moon } from "lucide-react";
 
 interface GlobeViewProps {
@@ -62,8 +63,6 @@ const POINT_COLOR = "#3790C9";
 const POINT_COLOR_HIGHLIGHT = "#41A0D8";
 
 const SPREAD_THRESHOLD = 1.5;
-
-const isMobile = typeof navigator !== "undefined" && /Mobi|Android/i.test(navigator.userAgent);
 
 function GlobeViewInner({
   edges,
@@ -124,10 +123,10 @@ function GlobeViewInner({
       controls.autoRotate = true;
       controls.autoRotateSpeed = 0.25;
       controls.enableDamping = true;
-      controls.dampingFactor = 0.15;
-      controls.rotateSpeed = 0.6;
-      controls.zoomSpeed = 0.8;
-      controls.minDistance = 120;
+      controls.dampingFactor = isMobile ? 0.25 : 0.15;
+      controls.rotateSpeed = isMobile ? 0.4 : 0.6;
+      controls.zoomSpeed = isMobile ? 0.5 : 0.8;
+      controls.minDistance = isMobile ? 150 : 120;
       controls.maxDistance = 600;
     }
     globe.pointOfView({ lat: 20, lng: 0, altitude: 2.5 });
@@ -332,7 +331,7 @@ function GlobeViewInner({
         pointColor={pointColorFn}
         pointAltitude={0.005}
         pointRadius={0.35}
-        pointResolution={isMobile ? 6 : 12}
+        pointResolution={isMobile ? 4 : 12}
         pointLabel={pointLabelFn}
         onPointClick={handlePointClick}
         pointsTransitionDuration={800}
@@ -350,29 +349,33 @@ function GlobeViewInner({
         arcAltitude={null}
         arcAltitudeAutoScale={0.4}
         arcLabel={arcLabelFn}
-        arcCurveResolution={isMobile ? 8 : 16}
+        arcCurveResolution={isMobile ? 6 : 16}
         onArcHover={undefined}
       />
 
-      <div className="absolute bottom-6 right-6 flex items-center gap-2">
+      <div className={`absolute flex items-center gap-2 ${isMobile ? "bottom-16 right-4" : "bottom-6 right-6"}`}>
         <button
           onClick={onToggleNightMode}
-          className={`glass-panel px-3 py-2 flex items-center gap-1.5 text-sm transition-colors cursor-pointer ${
+          className={`glass-panel flex items-center gap-1.5 text-sm transition-colors cursor-pointer ${
+            isMobile ? "px-4 py-3" : "px-3 py-2"
+          } ${
             nightMode
               ? "text-amber-400 hover:text-amber-300"
               : "text-[#3790C9] hover:text-[#41A0D8]"
           }`}
           title={nightMode ? "Switch to day mode" : "Switch to night mode"}
         >
-          {nightMode ? <Sun size={16} /> : <Moon size={16} />}
+          {nightMode ? <Sun size={isMobile ? 20 : 16} /> : <Moon size={isMobile ? 20 : 16} />}
         </button>
         <button
           onClick={resetView}
-          className="glass-panel px-4 py-2 flex items-center gap-2 text-sm text-[#3790C9] hover:text-[#41A0D8] transition-colors cursor-pointer"
+          className={`glass-panel flex items-center gap-2 text-sm text-[#3790C9] hover:text-[#41A0D8] transition-colors cursor-pointer ${
+            isMobile ? "px-4 py-3" : "px-4 py-2"
+          }`}
           title="Reset view"
         >
-          <RotateCcw size={16} />
-          Reset View
+          <RotateCcw size={isMobile ? 20 : 16} />
+          {!isMobile && "Reset View"}
         </button>
       </div>
     </div>

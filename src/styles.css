@@ -148,6 +148,14 @@
   }
 }
 
+@media (max-width: 767px) {
+  .globe-tooltip {
+    max-width: 240px !important;
+    font-size: 11px !important;
+    padding: 8px 10px !important;
+  }
+}
+
 .scrollbar-thin::-webkit-scrollbar {
   width: 4px;
 }

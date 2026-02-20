@@ -4,11 +4,13 @@ import {
   ChevronLeft,
   ChevronDown,
   ChevronRight,
+  ChevronUp,
   X,
   Search,
 } from "lucide-react";
 import type { FilterState, DataMeta } from "@/lib/data";
 import { getTypeColor } from "@/lib/colors";
+import { isSmallScreen } from "@/lib/mobile";
 
 interface FiltersPanelProps {
   filters: FilterState;
@@ -25,7 +27,7 @@ function FiltersPanelInner({
   onChange,
   onClear,
 }: FiltersPanelProps) {
-  const [collapsed, setCollapsed] = useState(() => window.innerWidth < 768);
+  const [collapsed, setCollapsed] = useState(() => isSmallScreen);
   const [typesOpen, setTypesOpen] = useState(false);
   const [continentsOpen, setContinentsOpen] = useState(false);
   const [countriesOpen, setCountriesOpen] = useState(false);
@@ -52,10 +54,21 @@ function FiltersPanelInner({
     return (
       <button
         onClick={() => setCollapsed(false)}
-        className="absolute top-4 left-4 z-20 glass-panel p-3 text-[#3790C9] hover:text-[#41A0D8] transition-colors cursor-pointer"
+        className={`z-20 glass-panel text-[#3790C9] hover:text-[#41A0D8] transition-colors cursor-pointer ${
+          isSmallScreen
+            ? "fixed bottom-0 left-0 right-0 flex items-center justify-center gap-2 py-3 rounded-t-2xl rounded-b-none text-xs font-medium"
+            : "absolute top-4 left-4 p-3"
+        }`}
         title="Open filters"
       >
-        <ChevronRight size={20} />
+        {isSmallScreen ? (
+          <>
+            <ChevronUp size={16} />
+            Filters
+          </>
+        ) : (
+          <ChevronRight size={20} />
+        )}
       </button>
     );
   }
@@ -94,7 +107,16 @@ function FiltersPanelInner({
   const selectedCountries = Array.from(filters.selectedCountries);
 
   return (
-    <div className="absolute top-4 left-4 z-20 glass-panel w-64 sm:w-72 max-h-[calc(100vh-32px)] flex flex-col">
+    <div className={`z-20 glass-panel flex flex-col ${
+      isSmallScreen
+        ? "fixed bottom-0 left-0 right-0 max-h-[60vh] rounded-t-2xl rounded-b-none"
+        : "absolute top-4 left-4 w-64 sm:w-72 max-h-[calc(100vh-32px)]"
+    }`}>
+      {isSmallScreen && (
+        <div className="flex justify-center pt-2 pb-1">
+          <div className="w-10 h-1 rounded-full bg-[#827875]/30" />
+        </div>
+      )}
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-[#827875]/15">
         <div className="flex items-center gap-2 text-sm font-semibold text-[#3790C9]">
@@ -114,7 +136,7 @@ function FiltersPanelInner({
             onClick={() => setCollapsed(true)}
             className="text-[#827875] hover:text-[#3790C9] p-1 cursor-pointer"
           >
-            <ChevronLeft size={16} />
+            {isSmallScreen ? <ChevronDown size={16} /> : <ChevronLeft size={16} />}
           </button>
         </div>
       </div>

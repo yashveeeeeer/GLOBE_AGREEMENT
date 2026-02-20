@@ -1,7 +1,8 @@
 import { memo, useMemo, useState } from "react";
-import { FileText, X, ChevronDown } from "lucide-react";
+import { FileText, X, ChevronDown, ChevronUp } from "lucide-react";
 import type { Edge } from "@/lib/data";
 import { getTypeColor } from "@/lib/colors";
+import { isSmallScreen } from "@/lib/mobile";
 
 interface AgreementDetailPanelProps {
   edges: Edge[];
@@ -48,16 +49,36 @@ function AgreementDetailPanelInner({
     return (
       <button
         onClick={() => setExpanded(true)}
-        className={`absolute ${panelBottomClass} right-4 z-20 glass-panel p-3 text-[#3790C9] hover:text-[#41A0D8] transition-colors cursor-pointer`}
+        className={`z-20 glass-panel text-[#3790C9] hover:text-[#41A0D8] transition-colors cursor-pointer ${
+          isSmallScreen
+            ? "fixed bottom-0 left-0 right-0 flex items-center justify-center gap-2 py-3 rounded-t-2xl rounded-b-none text-xs font-medium"
+            : `absolute ${panelBottomClass} right-4 p-3`
+        }`}
         title="Show agreements"
       >
-        <FileText size={20} />
+        {isSmallScreen ? (
+          <>
+            <ChevronUp size={16} />
+            Agreements ({connected.length})
+          </>
+        ) : (
+          <FileText size={20} />
+        )}
       </button>
     );
   }
 
   return (
-    <div className={`absolute ${panelBottomClass} right-4 z-20 glass-panel w-72 max-h-[50vh] flex flex-col`}>
+    <div className={`z-20 glass-panel flex flex-col ${
+      isSmallScreen
+        ? "fixed bottom-0 left-0 right-0 max-h-[50vh] rounded-t-2xl rounded-b-none"
+        : `absolute ${panelBottomClass} right-4 w-72 max-h-[50vh]`
+    }`}>
+      {isSmallScreen && (
+        <div className="flex justify-center pt-2 pb-1">
+          <div className="w-10 h-1 rounded-full bg-[#827875]/30" />
+        </div>
+      )}
       <div className="flex items-center justify-between px-4 py-2.5 border-b border-[#827875]/15">
         <div className="flex items-center gap-2 text-xs font-semibold text-[#3790C9] min-w-0">
           <FileText size={14} className="flex-shrink-0" />

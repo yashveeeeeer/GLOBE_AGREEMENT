@@ -1,7 +1,8 @@
 import { memo, useEffect, useMemo, useRef, useState } from "react";
-import { BarChart3, ChevronLeft, ChevronRight } from "lucide-react";
+import { BarChart3, ChevronLeft, ChevronRight, ChevronUp, ChevronDown } from "lucide-react";
 import type { Edge } from "@/lib/data";
 import { getTypeColor } from "@/lib/colors";
+import { isSmallScreen } from "@/lib/mobile";
 
 function useAnimatedCount(target: number, enabled: boolean, durationMs = 1200): number {
   const [display, setDisplay] = useState(0);
@@ -56,7 +57,7 @@ interface StatsPanelProps {
 }
 
 function StatsPanelInner({ filteredEdges, totalEdges, revealed }: StatsPanelProps) {
-  const [collapsed, setCollapsed] = useState(() => window.innerWidth < 768);
+  const [collapsed, setCollapsed] = useState(() => isSmallScreen);
 
   const stats = useMemo(() => {
     const agreementIds = new Set<number>();
@@ -99,16 +100,36 @@ function StatsPanelInner({ filteredEdges, totalEdges, revealed }: StatsPanelProp
     return (
       <button
         onClick={() => setCollapsed(false)}
-        className="absolute top-4 right-4 z-20 glass-panel p-3 text-[#3790C9] hover:text-[#41A0D8] transition-colors cursor-pointer"
+        className={`z-20 glass-panel text-[#3790C9] hover:text-[#41A0D8] transition-colors cursor-pointer ${
+          isSmallScreen
+            ? "fixed bottom-0 left-0 right-0 flex items-center justify-center gap-2 py-3 rounded-t-2xl rounded-b-none text-xs font-medium"
+            : "absolute top-4 right-4 p-3"
+        }`}
         title="Open stats"
       >
-        <ChevronLeft size={20} />
+        {isSmallScreen ? (
+          <>
+            <ChevronUp size={16} />
+            Stats
+          </>
+        ) : (
+          <ChevronLeft size={20} />
+        )}
       </button>
     );
   }
 
   return (
-    <div className="absolute top-4 right-4 z-20 glass-panel w-56 max-h-[calc(100vh-32px)] flex flex-col">
+    <div className={`z-20 glass-panel flex flex-col ${
+      isSmallScreen
+        ? "fixed bottom-0 left-0 right-0 max-h-[50vh] rounded-t-2xl rounded-b-none"
+        : "absolute top-4 right-4 w-56 max-h-[calc(100vh-32px)]"
+    }`}>
+      {isSmallScreen && (
+        <div className="flex justify-center pt-2 pb-1">
+          <div className="w-10 h-1 rounded-full bg-[#827875]/30" />
+        </div>
+      )}
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-[#827875]/15">
         <div className="flex items-center gap-2 text-sm font-semibold text-[#3790C9]">
@@ -119,7 +140,7 @@ function StatsPanelInner({ filteredEdges, totalEdges, revealed }: StatsPanelProp
           onClick={() => setCollapsed(true)}
           className="text-[#827875] hover:text-[#3790C9] p-1 cursor-pointer"
         >
-          <ChevronRight size={16} />
+          {isSmallScreen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
         </button>
       </div>
 
