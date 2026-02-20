@@ -38,6 +38,8 @@ export default function App() {
   const [filters, setFilters] = useState<FilterState | null>(null);
   const [deselectTrigger, setDeselectTrigger] = useState(0);
   const [deselectPending, setDeselectPending] = useState(false);
+  const [modeTransitioning, setModeTransitioning] = useState(false);
+  const modeTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => {
     let cancelled = false;
@@ -162,8 +164,16 @@ export default function App() {
   }, [filters?.selectedCountryIso3]);
 
   const handleToggleNightMode = useCallback(() => {
-    setNightMode((prev) => !prev);
-  }, []);
+    if (modeTransitioning) return;
+    if (modeTimerRef.current) clearTimeout(modeTimerRef.current);
+    setModeTransitioning(true);
+    modeTimerRef.current = setTimeout(() => {
+      setNightMode((prev) => !prev);
+      modeTimerRef.current = setTimeout(() => {
+        setModeTransitioning(false);
+      }, 400);
+    }, 500);
+  }, [modeTransitioning]);
 
   if (loading) {
     return (
@@ -199,8 +209,8 @@ export default function App() {
     <div
       className={`w-full h-full relative overflow-hidden${revealed && !animDone ? " globe-enter" : ""}`}
       style={{
-        backgroundColor: nightMode ? "#000011" : "#FAF9F6",
-        transition: "background-color 0.6s ease",
+        backgroundColor: modeTransitioning ? "#000000" : (nightMode ? "#000011" : "#FAF9F6"),
+        transition: "background-color 0.5s ease",
         ...(revealed ? {} : { opacity: 0 }),
       }}
       onAnimationEnd={() => setAnimDone(true)}
