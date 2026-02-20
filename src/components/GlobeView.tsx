@@ -304,7 +304,7 @@ function GlobeViewInner({
         ref={globeRef}
         width={dimensions.width}
         height={dimensions.height}
-        globeImageUrl="/textures/earth-day.jpg"
+        globeImageUrl={`${import.meta.env.BASE_URL}textures/earth-day.jpg`}
         backgroundColor="#FAF9F6"
         showAtmosphere={true}
         atmosphereColor="rgba(55, 144, 201, 0.25)"

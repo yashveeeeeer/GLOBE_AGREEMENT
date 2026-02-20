@@ -23,9 +23,10 @@ export default function App() {
 
     async function load() {
       try {
+        const base = import.meta.env.BASE_URL;
         const [edgesRes, countriesRes] = await Promise.all([
-          fetch("/data/agreements_edges.json"),
-          fetch("/data/countries_index.json"),
+          fetch(`${base}data/agreements_edges.json`),
+          fetch(`${base}data/countries_index.json`),
         ]);
 
         if (!edgesRes.ok) throw new Error(`Failed to load edges: ${edgesRes.status}`);
